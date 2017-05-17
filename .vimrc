@@ -16,8 +16,10 @@ filetype plugin indent on
 
 " other favorites: Tomorrow, Tomorrow-Night
 set background=dark
-colorscheme solarized
-" colorscheme quantum
+"colorscheme Tomorrow
+colorscheme quantum
+
+let g:used_javascript_libs = 'angularjs,react,jquery,underscore,angularuirouter,flux,requirejs,jasmine,chai,d3'
 
 set number        " Shows line numbers
 set tabstop=2     " Sets tabs to be two spaces
@@ -70,6 +72,9 @@ set completeopt-=preview                " tern_for_vim - turn off the preview wi
 set guioptions-=r   " Remove right-hand scrollbar
 set guioptions-=L   " Remove left-hand scrollbar
 
+let g:WebDevIconsOS = 'Darwin'
+let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
+
 " Macvim only
 hi NonText guifg=bg
 
@@ -83,6 +88,7 @@ nnoremap <leader>w :%s/\s\+$//e<cr>
 nnoremap <leader>r a<CR><esc><S-o><tab>
 nnoremap H \|
 nnoremap L $
+nnoremap m N
 onoremap H \|
 onoremap L $
 vnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
@@ -217,10 +223,10 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_javascript_checkers = ['eslint']
 
-let g:syntastic_error_symbol = '»»'
-let g:syntastic_style_error_symbol = '»»'
-let g:syntastic_warning_symbol = '»»'
-let g:syntastic_style_warning_symbol = '»»'
+let g:syntastic_error_symbol = 'ㄨ'
+let g:syntastic_style_error_symbol = 'ㄨ'
+let g:syntastic_warning_symbol = 'ㄨ'
+let g:syntastic_style_warning_symbol = 'ㄨ'
 " let g:syntastic_error_symbol = '❌'
 " let g:syntastic_style_error_symbol = '⁉️'
 " let g:syntastic_warning_symbol = '⚠️'
@@ -247,3 +253,29 @@ iabbrev funcotin function
 iabbrev retrun return
 iabbrev deafult default
 iabbrev defult default
+iabbrev submut submit
+iabbrev consructor constructor
+iabbrev constuctor constructor
+iabbrev consuctor constructor
+
+" NERDTress File highlighting
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+ exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+
+call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('gitignore', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+call NERDTreeHighlightFile('js', 'blue', 'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+
