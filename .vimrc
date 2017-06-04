@@ -86,6 +86,8 @@ nnoremap <leader>n :noh<cr>
 nnoremap <leader>e :redraw!<cr>
 nnoremap <leader>w :%s/\s\+$//e<cr>
 nnoremap <leader>r a<CR><esc><S-o><tab>
+nnoremap <leader>t :SyntasticToggle<cr>
+nnoremap <leader>c :SyntasticCheck<cr>
 nnoremap H \|
 nnoremap L $
 nnoremap m N
@@ -236,6 +238,9 @@ highlight link SyntasticErrorSign SignColumn
 highlight link SyntasticWarningSign SignColumn
 highlight link SyntasticStyleErrorSign SignColumn
 highlight link SyntasticStyleWarningSign SignColumn
+
+" syntastic starts in passive mode
+autocmd VimEnter * SyntasticToggleMode
 
 " format JSON by saying :FormatJSON
 com! FormatJSON %!python -m json.tool
