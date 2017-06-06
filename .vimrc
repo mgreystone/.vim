@@ -85,14 +85,20 @@ nnoremap <leader>, A,<esc>
 nnoremap <leader>n :noh<cr>
 nnoremap <leader>e :redraw!<cr>
 nnoremap <leader>w :%s/\s\+$//e<cr>
+" rip into the next line (ex. split up a pair of <div></div>)
 nnoremap <leader>r a<CR><esc><S-o><tab>
 nnoremap <leader>t :SyntasticToggle<cr>
 nnoremap <leader>c :SyntasticCheck<cr>
+" move to beginning and end of line with H and L
 nnoremap H \|
 nnoremap L $
-nnoremap m N
+vnoremap H \|
+vnoremap L $
 onoremap H \|
 onoremap L $
+" easier to go back in searches
+nnoremap m N
+" custom bracket completion
 vnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
 vnoremap <leader>" <esc>`>a"<esc>`<i"<esc>
 vnoremap <leader>` <esc>`>a`<esc>`<i`<esc>
@@ -283,4 +289,3 @@ call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
 call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
 call NERDTreeHighlightFile('js', 'blue', 'none', '#3366FF', '#151515')
 call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
-
