@@ -90,12 +90,19 @@ nnoremap <leader>r a<CR><esc><S-o><tab>
 nnoremap <leader>t :SyntasticToggle<cr>
 nnoremap <leader>c :SyntasticCheck<cr>
 " move to beginning and end of line with H and L
+" and move quicker with J and K
 nnoremap H \|
 nnoremap L $
+nnoremap J 4j
+nnoremap K 4k
 vnoremap H \|
 vnoremap L $
+vnoremap J 4j
+vnoremap K 4k
 onoremap H \|
 onoremap L $
+onoremap J 4j
+onoremap K 4k
 " easier to go back in searches
 nnoremap m N
 " custom bracket completion
@@ -108,6 +115,8 @@ vnoremap <leader>[ <esc>`>a]<esc>`<i[<esc>
 vnoremap <leader>] <esc>`>a]<esc>`<i[<esc>
 vnoremap <leader>{ <esc>`>a}<esc>`<i{<esc>
 vnoremap <leader>} <esc>`>a}<esc>`<i{<esc>
+" quit
+nnoremap <leader>Q :q<cr>
 
 " Navigate between buffers
 nnoremap <Leader>l :bnext<CR>
@@ -214,7 +223,7 @@ if executable('ag')
 endif
 
 " bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 " bind \ (backward slash) to grep shortcut
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ag<SPACE>
