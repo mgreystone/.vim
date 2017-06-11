@@ -9,18 +9,30 @@ let mapleader = " "
 execute pathogen#infect()
 call pathogen#helptags()
 
-set path=$PWD/**
-
+"""
+""" Syntax Highlighting and Appearance
+"""
 syntax on
 filetype plugin indent on
 
-" other favorites: Tomorrow, Tomorrow-Night
 set background=dark
-"colorscheme Tomorrow
 colorscheme quantum
 
 let g:used_javascript_libs = 'angularjs,react,jquery,underscore,angularuirouter,flux,requirejs,jasmine,chai,d3'
 
+let g:WebDevIconsOS = 'Darwin'
+let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
+
+" Macvim only
+hi NonText guifg=bg
+
+" vim-jsx - allow syntax highlighting in .js files
+let g:jsx_ext_required = 0
+
+"""
+""" Configuration
+"""
+set path=$PWD/**
 set number        " Shows line numbers
 set tabstop=2     " Sets tabs to be two spaces
 set shiftwidth=2  " Sets how many columns are indented when you re-indent
@@ -72,12 +84,6 @@ set completeopt-=preview                " tern_for_vim - turn off the preview wi
 set guioptions-=r   " Remove right-hand scrollbar
 set guioptions-=L   " Remove left-hand scrollbar
 
-let g:WebDevIconsOS = 'Darwin'
-let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
-
-" Macvim only
-hi NonText guifg=bg
-
 " Personal hotkeys
 inoremap jk <esc>
 nnoremap <leader>; A;<esc>
@@ -90,10 +96,10 @@ nnoremap <leader>r a<CR><esc><S-o><tab>
 nnoremap <leader>t :SyntasticToggle<cr>
 nnoremap <leader>c :SyntasticCheck<cr>
 " move to beginning and end of line with H and L
-" and move quicker with J and K
+" and move quicker with J and K (except in normal mode)
 nnoremap H \|
 nnoremap L $
-nnoremap J 4j
+"nnoremap J 4j
 nnoremap K 4k
 vnoremap H \|
 vnoremap L $
@@ -103,6 +109,8 @@ onoremap H \|
 onoremap L $
 onoremap J 4j
 onoremap K 4k
+" delete to end of line
+nnoremap <C-k> d$
 " easier to go back in searches
 nnoremap m N
 " custom bracket completion
@@ -117,10 +125,14 @@ vnoremap <leader>{ <esc>`>a}<esc>`<i{<esc>
 vnoremap <leader>} <esc>`>a}<esc>`<i{<esc>
 " quit
 nnoremap <leader>Q :q<cr>
+" Quick Save
+nnoremap <leader>s :w<CR>
 
 " Navigate between buffers
 nnoremap <Leader>l :bnext<CR>
 nnoremap <Leader>b :bprevious<CR>
+" Close buffers with vim-bbye
+:nnoremap <Leader>q :Bdelete<CR>
 
 " Use tab to jump between blocks, because it's easier
 nnoremap <tab> %
@@ -136,24 +148,11 @@ nnoremap <S-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 let NERDTreeIgnore=['.git$','.DS_Store']
 
-" Quick Save
-nnoremap <leader>s :w<CR>
-
-" vim-jsx - allow syntax highlighting in .js files
-let g:jsx_ext_required = 0
-
-" CtrlP
-" If Ctrl P can't find a file, use CtrlPClearAllCaches to clear
-let g:ctrlp_dont_split='NERD' " Play nice with NERDTree
-let g:ctrlp_regexp_search=1 " Default to regexp search
-
 " vim-airline
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
 let g:airline_theme='quantum' " others: badwolf
 
-" Find
-nnoremap <C-f> /
 " Indent / deindent after selecting the text with (⇧ v), (.) to repeat.
 vnoremap <Tab> >
 vnoremap <S-Tab> <
@@ -168,18 +167,13 @@ nnoremap <C-z>  :undo<CR>
 inoremap <C-z>  <Esc>:undo<CR>
 nnoremap <C-y>  :redo<CR>
 inoremap <C-y>  <Esc>:redo<CR>
-" Tabs
-nnoremap <C-b>  :tabprevious<CR>
-inoremap <C-b>  <Esc>:tabprevious<CR>i
-nnoremap <C-l>  :tabnext<CR>
-inoremap <C-l>  <Esc>:tabnext<CR>i
-nnoremap <C-t>  :tabnew<CR>
-inoremap <C-t>  <Esc>:tabnew<CR>i
-nnoremap <C-k>  :tabclose<CR>
-inoremap <C-k>  <Esc>:tabclose<CR>i
+
 " Toggle Git Gutter
 nnoremap  <Leader>g :GitGutterToggle<CR>
 
+"""
+""" Copy and Paste
+"""
 " Fix paste from system clipboard
 if &term =~ "xterm.*"
     let &t_ti = &t_ti . "\e[?2004h"
@@ -209,9 +203,15 @@ inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
-" Close buffers with vim-bbye
-:nnoremap <Leader>q :Bdelete<CR>
-
+"""
+""" Searching
+"""
+" Find
+nnoremap <C-f> /
+" CtrlP
+" If Ctrl P can't find a file, use CtrlPClearAllCaches to clear
+let g:ctrlp_dont_split='NERD' " Play nice with NERDTree
+let g:ctrlp_regexp_search=1 " Default to regexp search
 " The Silver Searcher
 if executable('ag')
   " Use ag over grep
@@ -244,10 +244,6 @@ let g:syntastic_error_symbol = 'ㄨ'
 let g:syntastic_style_error_symbol = 'ㄨ'
 let g:syntastic_warning_symbol = 'ㄨ'
 let g:syntastic_style_warning_symbol = 'ㄨ'
-" let g:syntastic_error_symbol = '❌'
-" let g:syntastic_style_error_symbol = '⁉️'
-" let g:syntastic_warning_symbol = '⚠️'
-" let g:syntastic_style_warning_symbol = '💩'
 
 highlight link SyntasticErrorSign SignColumn
 highlight link SyntasticWarningSign SignColumn
@@ -259,12 +255,6 @@ autocmd VimEnter * SyntasticToggleMode
 
 " format JSON by saying :FormatJSON
 com! FormatJSON %!python -m json.tool
-
-""""""" Changing multiple selections """"""
-" No need for sublime's multiple cursors!
-" Highlight your selection with /
-" 'cgn' into selection you want to start with and make the change,
-" re-enter normal mode, and apply the change to each subseqent selection with '.'
 
 " Abbreviations - fix common typos
 iabbrev funcoitn function
@@ -278,23 +268,38 @@ iabbrev consructor constructor
 iabbrev constuctor constructor
 iabbrev consuctor constructor
 
-" NERDTress File highlighting
+" NERDTree File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 endfunction
 
-call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
-call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('ico', 'green', 'none', 'green', '#151515')
+call NERDTreeHighlightFile('png', 'green', 'none', 'green', '#151515')
+call NERDTreeHighlightFile('jpg', 'green', 'none', 'green', '#151515')
+call NERDTreeHighlightFile('jpeg', 'green', 'none', 'green', '#151515')
+
 call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('map', 'blue', 'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('js', 'blue', 'none', '#3366FF', '#151515')
+
+call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
 call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
 call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
 call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('lock', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('rc', 'yellow', 'none', 'yellow', '#151515')
 call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
 call NERDTreeHighlightFile('gitignore', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+
+call NERDTreeHighlightFile('html', 'magenta', 'none', 'magenta', '#151515')
+call NERDTreeHighlightFile('twig', 'magenta', 'none', 'magenta', '#151515')
+call NERDTreeHighlightFile('jade', 'magenta', 'none', 'magenta', '#151515')
+call NERDTreeHighlightFile('pug', 'magenta', 'none', 'magenta', '#151515')
+
 call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
 call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
-call NERDTreeHighlightFile('js', 'blue', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+call NERDTreeHighlightFile('scss', 'cyan', 'none', 'cyan', '#151515')
+
+call NERDTreeHighlightFile('coffee', 'red', 'none', 'red', '#151515')
+call NERDTreeHighlightFile('php', 'red', 'none', '#ff00ff', '#151515')
