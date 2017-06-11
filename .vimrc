@@ -46,10 +46,6 @@ set autoread      " Reload files changed outside vim
 set scrolloff=8   " Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
 set sidescroll=1  " Auto resize Vim splits to active split
-set winwidth=104
-set winheight=5
-set winminheight=5
-set winheight=999
 set wildmenu        " Command line completion enhanced
 set wildignore+=**/node_modules/**
 set wildignore+=**/bower_components/**
@@ -269,37 +265,37 @@ iabbrev constuctor constructor
 iabbrev consuctor constructor
 
 " NERDTree File highlighting
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
- exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
- exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-endfunction
-
-call NERDTreeHighlightFile('ico', 'green', 'none', 'green', '#151515')
-call NERDTreeHighlightFile('png', 'green', 'none', 'green', '#151515')
-call NERDTreeHighlightFile('jpg', 'green', 'none', 'green', '#151515')
-call NERDTreeHighlightFile('jpeg', 'green', 'none', 'green', '#151515')
-
-call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('map', 'blue', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('js', 'blue', 'none', '#3366FF', '#151515')
-
-call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('lock', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('rc', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('gitignore', 'yellow', 'none', 'yellow', '#151515')
-
-call NERDTreeHighlightFile('html', 'magenta', 'none', 'magenta', '#151515')
-call NERDTreeHighlightFile('twig', 'magenta', 'none', 'magenta', '#151515')
-call NERDTreeHighlightFile('jade', 'magenta', 'none', 'magenta', '#151515')
-call NERDTreeHighlightFile('pug', 'magenta', 'none', 'magenta', '#151515')
-
-call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('scss', 'cyan', 'none', 'cyan', '#151515')
-
-call NERDTreeHighlightFile('coffee', 'red', 'none', 'red', '#151515')
-call NERDTreeHighlightFile('php', 'red', 'none', '#ff00ff', '#151515')
+" function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+"  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+"  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+" endfunction
+"
+" call NERDTreeHighlightFile('ico', 'green', 'none', 'green', '#151515')
+" call NERDTreeHighlightFile('png', 'green', 'none', 'green', '#151515')
+" call NERDTreeHighlightFile('jpg', 'green', 'none', 'green', '#151515')
+" call NERDTreeHighlightFile('jpeg', 'green', 'none', 'green', '#151515')
+"
+" call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+" call NERDTreeHighlightFile('map', 'blue', 'none', '#3366FF', '#151515')
+" call NERDTreeHighlightFile('js', 'blue', 'none', '#3366FF', '#151515')
+"
+" call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+" call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+" call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+" call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+" call NERDTreeHighlightFile('lock', 'yellow', 'none', 'yellow', '#151515')
+" call NERDTreeHighlightFile('rc', 'yellow', 'none', 'yellow', '#151515')
+" call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+" call NERDTreeHighlightFile('gitignore', 'yellow', 'none', 'yellow', '#151515')
+"
+" call NERDTreeHighlightFile('html', 'magenta', 'none', 'magenta', '#151515')
+" call NERDTreeHighlightFile('twig', 'magenta', 'none', 'magenta', '#151515')
+" call NERDTreeHighlightFile('jade', 'magenta', 'none', 'magenta', '#151515')
+" call NERDTreeHighlightFile('pug', 'magenta', 'none', 'magenta', '#151515')
+"
+" call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+" call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+" call NERDTreeHighlightFile('scss', 'cyan', 'none', 'cyan', '#151515')
+"
+" call NERDTreeHighlightFile('coffee', 'red', 'none', 'red', '#151515')
+" call NERDTreeHighlightFile('php', 'red', 'none', '#ff00ff', '#151515')
