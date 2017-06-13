@@ -6,6 +6,8 @@ set nocompatible
 " Leader - ( Spacebar )
 let mapleader = " "
 
+let g:pathogen_disabled = ["vim-nerdtree-syntax-highlight"]
+
 execute pathogen#infect()
 call pathogen#helptags()
 
@@ -16,15 +18,26 @@ syntax on
 filetype plugin indent on
 
 set background=dark
+if (has("termguicolors"))
+  set termguicolors
+endif
 colorscheme quantum
 
 let g:used_javascript_libs = 'angularjs,react,jquery,underscore,angularuirouter,flux,requirejs,jasmine,chai,d3'
 
 let g:WebDevIconsOS = 'Darwin'
-let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
+let g:WebDevIconsNerdTreeAfterGlyphPadding = '  '
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+" let g:NERDTreeSyntaxDisableDefaultExtensions = 1
+" let g:NERDTreeDisableExactMatchHighlight = 1
+" let g:NERDTreeDisablePatternMatchHighlight = 1
+" let g:NERDTreeLimitedSyntax = 1 " limit syntax for the most popular extensions
+" let g:NERDTreeSyntaxEnabledExtensions = ['c', 'h', 'cpp', 'php', 'rb', 'js', 'css', 'scss,', 'jsx', 'json', 'md', 'txt', 'html', 'py']
+
 
 " Macvim only
 hi NonText guifg=bg
+set guifont=Knack\ Regular\ Nerd\ Font\ Complete:h13
 
 " vim-jsx - allow syntax highlighting in .js files
 let g:jsx_ext_required = 0
@@ -63,7 +76,7 @@ set ttimeout         " Timeout to wait for compound commands
 set ttimeoutlen=50   " Sets timeout length for timeout commands
 set incsearch        " Show pattern matches as search is typed
 set laststatus=2     " Always show a status line
-set ruler            " Show line and col number of cursor
+set noruler          " Hide col/line number (handled by airline)
 set showcmd          " Shows partial command in the last line
 set encoding=utf-8   " Natch
 set list             " Show whitespace characters
@@ -79,6 +92,7 @@ set completeopt=menuone,longest,preview " Options for insert mode completion
 set completeopt-=preview                " tern_for_vim - turn off the preview window
 set guioptions-=r   " Remove right-hand scrollbar
 set guioptions-=L   " Remove left-hand scrollbar
+set lazyredraw      " Don't redraw sometimes
 
 " Personal hotkeys
 inoremap jk <esc>
@@ -263,39 +277,3 @@ iabbrev submut submit
 iabbrev consructor constructor
 iabbrev constuctor constructor
 iabbrev consuctor constructor
-
-" NERDTree File highlighting
-" function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-"  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-"  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-" endfunction
-"
-" call NERDTreeHighlightFile('ico', 'green', 'none', 'green', '#151515')
-" call NERDTreeHighlightFile('png', 'green', 'none', 'green', '#151515')
-" call NERDTreeHighlightFile('jpg', 'green', 'none', 'green', '#151515')
-" call NERDTreeHighlightFile('jpeg', 'green', 'none', 'green', '#151515')
-"
-" call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
-" call NERDTreeHighlightFile('map', 'blue', 'none', '#3366FF', '#151515')
-" call NERDTreeHighlightFile('js', 'blue', 'none', '#3366FF', '#151515')
-"
-" call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
-" call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
-" call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-" call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
-" call NERDTreeHighlightFile('lock', 'yellow', 'none', 'yellow', '#151515')
-" call NERDTreeHighlightFile('rc', 'yellow', 'none', 'yellow', '#151515')
-" call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-" call NERDTreeHighlightFile('gitignore', 'yellow', 'none', 'yellow', '#151515')
-"
-" call NERDTreeHighlightFile('html', 'magenta', 'none', 'magenta', '#151515')
-" call NERDTreeHighlightFile('twig', 'magenta', 'none', 'magenta', '#151515')
-" call NERDTreeHighlightFile('jade', 'magenta', 'none', 'magenta', '#151515')
-" call NERDTreeHighlightFile('pug', 'magenta', 'none', 'magenta', '#151515')
-"
-" call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
-" call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
-" call NERDTreeHighlightFile('scss', 'cyan', 'none', 'cyan', '#151515')
-"
-" call NERDTreeHighlightFile('coffee', 'red', 'none', 'red', '#151515')
-" call NERDTreeHighlightFile('php', 'red', 'none', '#ff00ff', '#151515')
