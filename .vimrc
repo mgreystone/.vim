@@ -1,4 +1,5 @@
 " Type :so % to refresh .vimrc after making changes
+set t_ut=
 
 " Use Vim settings, rather then Vi settings
 set nocompatible
@@ -42,6 +43,8 @@ set guifont=Knack\ Regular\ Nerd\ Font\ Complete:h13
 " vim-jsx - allow syntax highlighting in .js files
 let g:jsx_ext_required = 0
 
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+
 """
 """ Configuration
 """
@@ -74,6 +77,7 @@ set nrformats-=octal " Remove octals when using C-a or C-x
 set shiftround       " Rounds indent to multiple of shiftwidth
 set ttimeout         " Timeout to wait for compound commands
 set ttimeoutlen=50   " Sets timeout length for timeout commands
+set timeoutlen=350
 set incsearch        " Show pattern matches as search is typed
 set laststatus=2     " Always show a status line
 set noruler          " Hide col/line number (handled by airline)
@@ -103,8 +107,6 @@ nnoremap <leader>e :redraw!<cr>
 nnoremap <leader>w :%s/\s\+$//e<cr>
 " rip into the next line (ex. split up a pair of <div></div>)
 nnoremap <leader>r a<CR><esc><S-o><tab>
-nnoremap <leader>t :SyntasticToggle<cr>
-nnoremap <leader>c :SyntasticCheck<cr>
 " move to beginning and end of line with H and L
 " and move quicker with J and K (except in normal mode)
 nnoremap H \|
@@ -137,12 +139,18 @@ vnoremap <leader>} <esc>`>a}<esc>`<i{<esc>
 nnoremap <leader>Q :q<cr>
 " Quick Save
 nnoremap <leader>s :w<CR>
+" replace single quotes with double
+nnoremap <leader>" :%s/'/"/g
+" replace double quotes with single
+nnoremap <leader>' :%s/"/'/g
 
 " Navigate between buffers
 nnoremap <Leader>l :bnext<CR>
 nnoremap <Leader>b :bprevious<CR>
 " Close buffers with vim-bbye
 :nnoremap <Leader>q :Bdelete<CR>
+" Close all open buffers with vim-bbye
+:nnoremap Q :bufdo Bdelete<CR>
 
 " Use tab to jump between blocks, because it's easier
 nnoremap <tab> %
@@ -237,31 +245,6 @@ endif
 " bind \ (backward slash) to grep shortcut
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ag<SPACE>
-
-" Syntastic and ESLint
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_loc_list_height = 5
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-let g:syntastic_javascript_checkers = ['eslint']
-
-let g:syntastic_error_symbol = 'ㄨ'
-let g:syntastic_style_error_symbol = 'ㄨ'
-let g:syntastic_warning_symbol = 'ㄨ'
-let g:syntastic_style_warning_symbol = 'ㄨ'
-
-highlight link SyntasticErrorSign SignColumn
-highlight link SyntasticWarningSign SignColumn
-highlight link SyntasticStyleErrorSign SignColumn
-highlight link SyntasticStyleWarningSign SignColumn
-
-" syntastic starts in passive mode
-autocmd VimEnter * SyntasticToggleMode
 
 " format JSON by saying :FormatJSON
 com! FormatJSON %!python -m json.tool
