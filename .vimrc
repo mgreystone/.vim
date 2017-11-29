@@ -7,7 +7,7 @@ set nocompatible
 " Leader - ( Spacebar )
 let mapleader = " "
 
-let g:pathogen_disabled = ["vim-nerdtree-syntax-highlight"]
+let g:pathogen_disabled = ["vim-nerdtree-syntax-highlight", "vim-devicons"]
 
 execute pathogen#infect()
 call pathogen#helptags()
@@ -18,17 +18,19 @@ call pathogen#helptags()
 syntax on
 filetype plugin indent on
 
-set background=dark
+" set background=light
 if (has("termguicolors"))
   set termguicolors
 endif
-colorscheme quantum
+" colorscheme quantum
+" colorscheme iceberg
+colorscheme Tomorrow
 
 let g:used_javascript_libs = 'angularjs,react,jquery,underscore,angularuirouter,flux,requirejs,jasmine,chai,d3'
 
-let g:WebDevIconsOS = 'Darwin'
-let g:WebDevIconsNerdTreeAfterGlyphPadding = '  '
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+" let g:WebDevIconsOS = 'Darwin'
+" let g:WebDevIconsNerdTreeAfterGlyphPadding = '  '
+" let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 " let g:NERDTreeSyntaxDisableDefaultExtensions = 1
 " let g:NERDTreeDisableExactMatchHighlight = 1
 " let g:NERDTreeDisablePatternMatchHighlight = 1
@@ -38,12 +40,17 @@ let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 
 " Macvim only
 hi NonText guifg=bg
-set guifont=Knack\ Regular\ Nerd\ Font\ Complete:h13
+" set guifont=Knack\ Regular\ Nerd\ Font\ Complete:h13
+set macligatures
+set guifont=Fira\ Code:h12
 
 " vim-jsx - allow syntax highlighting in .js files
 let g:jsx_ext_required = 0
 
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+
+" vim-markdown
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript']
 
 """
 """ Configuration
@@ -160,7 +167,7 @@ vnoremap <tab> %
 let g:html_indent_tags = 'li\|p'
 
 " NerdTree
-autocmd vimenter * if @% !~# '.vimrc' && @% !~# '.bash_profile' && @% !~# '.eslintrc.json'| NERDTree | endif  " Open NERDTREE when vim opens
+autocmd vimenter * if @% !~# '.vimrc' && @% !~# '.bash_profile' && @% !~# '.eslintrc.json' && @% !~# '.todo'| NERDTree | endif  " Open NERDTREE when vim opens
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Close vim if only NERDTree is open
 nnoremap <S-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
@@ -185,6 +192,9 @@ nnoremap <C-z>  :undo<CR>
 inoremap <C-z>  <Esc>:undo<CR>
 nnoremap <C-y>  :redo<CR>
 inoremap <C-y>  <Esc>:redo<CR>
+
+" Toggle Ale Linter
+nnoremap <leader>at :ALEToggle<CR>
 
 " Toggle Git Gutter
 nnoremap  <Leader>g :GitGutterToggle<CR>
