@@ -7,11 +7,6 @@ set nocompatible
 " filetype func off
 filetype off
 
-let g:used_javascript_libs = 'angularjs,react,jquery,underscore,angularuirouter,flux,requirejs,jasmine,chai,d3'
-
-" vim-jsx - allow syntax highlighting in .js files
-let g:jsx_ext_required = 0
-
 
 " initialize vundle
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -39,6 +34,8 @@ Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'elzr/vim-json'
+Plugin 'othree/jspc'
 
 " stop - all plugins above
 call vundle#end()
@@ -135,3 +132,11 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+" my javascript libraries
+let g:used_javascript_libs = 'angularjs,react,jquery,underscore,angularuirouter,flux,requirejs,jasmine,chai,d3'
+
+" vim-jsx - allow syntax highlighting in .js files
+let g:jsx_ext_required = 0
+
+
