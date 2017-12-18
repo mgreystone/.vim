@@ -132,6 +132,9 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+" more natural splits
+set splitbelow
+set splitright
 
 " my javascript libraries
 let g:used_javascript_libs = 'angularjs,react,jquery,underscore,angularuirouter,flux,requirejs,jasmine,chai,d3'
@@ -139,4 +142,6 @@ let g:used_javascript_libs = 'angularjs,react,jquery,underscore,angularuirouter,
 " vim-jsx - allow syntax highlighting in .js files
 let g:jsx_ext_required = 0
 
+" set system clipboard as the default register
+set clipboard=unnamedplus
 
