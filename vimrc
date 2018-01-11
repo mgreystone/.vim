@@ -109,7 +109,8 @@ set noshowmode
 " setting up prettier
 let g:prettier#autoformat = 0
 let g:prettier#config#semi = 'false'
-map <C-P>  :PrettierAsync <CR>
+map <C-P>  :Prettier <CR>
+map <C-E>  :ALEFix <CR>
 " autocmd BufWritePre *.js, *.jsx, *.css,*.scss,*.less PrettierAsync
 
 " ALE CONIGURATIONS
@@ -122,6 +123,7 @@ let g:ale_sign_column_always = 1
 let g:ale_sign_warning = '>>'
 highlight ALEError ctermbg=none cterm=underline
 highlight ALEWarning ctermbg=none cterm=underline
+let g:ale_fixers = { 'javascript': ['prettier-eslint', 'eslint'] }
 
 " clears vims search highlight with esc
 nnoremap  <silent> <F2> :noh<cr>
