@@ -18,7 +18,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'prettier/vim-prettier'
+" Plugin 'prettier/vim-prettier'
 Plugin 'rakr/vim-one'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-commentary'
@@ -72,8 +72,6 @@ autocmd vimenter * if @% !~# '.vimrc' && @% !~# '.bash_profile' && @% !~# '.esli
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Close vim if only NERDTree is open
 let NERDTreeShowHidden=1
 
-
-
 " autocmd StdinReadPre " Vim Multi Cursors Key Bindings
 let g:multi_cursor_use_default_mapping=0
 
@@ -107,10 +105,9 @@ set noshowmode
 
 
 " setting up prettier
-let g:prettier#autoformat = 0
-let g:prettier#config#semi = 'false'
-map <C-P>  :Prettier <CR>
-map <C-E>  :ALEFix <CR>
+" let g:prettier#autoformat = 0
+" let g:prettier#config#semi = 'false'
+" map <C-P>  :Prettier <CR>
 " autocmd BufWritePre *.js, *.jsx, *.css,*.scss,*.less PrettierAsync
 
 " ALE CONIGURATIONS
@@ -118,12 +115,25 @@ map <C-E>  :ALEFix <CR>
 " let g:ale_linter_aliases = {'javascript.jsx': 'javascript', 'jsx': 'javascript'}
 let g:ale_linters = {
 \   'javascript': ['eslint'],
+\   'css': ['csslint']
 \}
+let g:ale_fixers = { 
+\   'javascript': ['prettier', 'eslint'],
+\   'css': ['prettier'],
+\   'json': ['prettier'],
+\   'markdown': ['prettier'],
+\   'scss': ['prettier']
+\}
+
+let g:ale_javascript_prettier_use_local_config = 1
+
 let g:ale_sign_column_always = 1
 let g:ale_sign_warning = '>>'
 highlight ALEError ctermbg=none cterm=underline
 highlight ALEWarning ctermbg=none cterm=underline
-let g:ale_fixers = { 'javascript': ['prettier-eslint', 'eslint'] }
+let g:ale_fixers['javascript.jsx'] = ['prettier', 'eslint']
+let g:ale_fix_on_save = 1
+map <C-P>  :ALEFix <CR>
 
 " clears vims search highlight with esc
 nnoremap  <silent> <F2> :noh<cr>
