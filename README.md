@@ -1,26 +1,25 @@
-Hi, I'm Tom. This is my .vim
+# Jazzy's NeoVimrc
 
-Here are the packages I use:
+#### Packages I Use:
 
-* YouCompleteMe
-* nerdtree
-* vim-airline-themes
-* vim-jsx
-* auto-pairs
-* pathogen
-* vim-bbye
+* Vundle.vim
+* nerdtree.git
 * vim-multiple-cursors
-* colorschemes
-* syntastic
-* vim-devicons
-* vim-quantum
-* ctrlp.vim
-* tcomment_vim
-* vim-gitgutter
-* vim-twig
-* delimitMate
-* tern_for_vim
+* YouCompleteMe
+* vim-one
+* auto-pairs
+* vim-commentary
+* vim-dracula
 * vim-javascript
-* javascript-libraries-syntax.vim
-* vim-airline
 * vim-javascript-syntax
+* vim-jsx
+* javascript-libraries-syntax.vim
+* JavaScript-Indent
+* ale
+* vim-airline
+* vim-airline-themes
+* vim-fugitive
+* vim-gitgutter
+* vim-json
+* jspc.vim
+* vim-surround

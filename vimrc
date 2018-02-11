@@ -18,7 +18,6 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'Valloric/YouCompleteMe'
-" Plugin 'prettier/vim-prettier'
 Plugin 'rakr/vim-one'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-commentary'
@@ -27,7 +26,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'mxw/vim-jsx'
 Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'marijnh/tern_for_vim'
+" Plugin 'marijnh/tern_for_vim'
 Plugin 'vim-scripts/JavaScript-Indent'
 Plugin 'w0rp/ale'
 Plugin 'bling/vim-airline'
@@ -35,7 +34,8 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'elzr/vim-json'
-Plugin 'othree/jspc'
+Plugin 'othree/jspc.vim'
+Plugin 'tpope/vim-surround'
 
 " stop - all plugins above
 call vundle#end()
@@ -49,6 +49,7 @@ set guifont=Fira_Code:h15
 " set color
 syntax on
 set t_Co=256
+" set termguicolors
 set background=dark
 let g:one_allow_italics = 1
 let g:dracula_italic = 1
@@ -156,4 +157,4 @@ let g:jsx_ext_required = 0
 
 " set system clipboard as the default register
 set clipboard=unnamedplus
-
+set guicursor=n:blinkon1
