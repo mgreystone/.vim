@@ -1,4 +1,6 @@
 # Jazzy's NeoVimrc
+Hi, I'm Jazzy! 
+I :heart: nerding out about NeoVim and customizing the editor!
 
 | Packages I Use:                 |                                                    How I feel about them |
 | ------------------------------- | -----------------------------------------------------------------------: |
@@ -22,3 +24,14 @@
 | vim-json                        |                                       makes json files look so so pretty |
 | jspc.vim                        |                                         keep track of recurring strings! |
 | vim-surround                    |                    Again, I love not having to type both brackets myself |
+
+### Usage
+1. clone to user home
+2. symlink to appropriate place
+  - for NeoVim `ln -s ~/.vim/vimrc ~/.config/nvim/init.vim`
+  - for Vim `ln -s ~/.vim/vimrc ~/.vimrc`
+3. clone Vundle 
+  - `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+4. Install YouCompleteMe following [this](https://github.com/Valloric/YouCompleteMe)
+5. Open NeoVim or Vim and run `:PluginInstall`
+6. Restart NeoVim/Vim and enjoy!
