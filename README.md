@@ -1,13 +1,13 @@
 # Jazzy's NeoVimrc
 Hi, I'm Jazzy! 
-I :heart: nerding out about NeoVim and customizing the editor!
+  I :heart: nerding out about NeoVim and customizing the editor!
 
 | Packages I Use:                 |                                                    How I feel about them |
 | ------------------------------- | -----------------------------------------------------------------------: |
 | Vundle.vim                      |                                        Makes Plugin Management a Breeze! |
 | nerdtree.git                    |                                                   Absolutely **Crucial** |
 | vim-multiple-cursors            |         Great for beginners to vim, but native vim features do it better |
-| YouCompleteMe                   | So Helpful, keeps track of paths, variable names and built in functions! |
+| YouCompleteMe                   | So Helpful, keeps track of paths,   variable names and built in functions! |
 | auto-pairs                      |                        closes brackets and quotes! what's not to love?!? |
 | vim-commentary                  |                                       Comment things out quick and easy! |
 | vim-dracula                     |                                                     Clean & simple theme |
