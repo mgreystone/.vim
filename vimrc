@@ -156,5 +156,6 @@ let g:used_javascript_libs = 'angularjs,react,jquery,underscore,angularuirouter,
 let g:jsx_ext_required = 0
 
 " set system clipboard as the default register
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
+
 set guicursor=n:blinkon1
