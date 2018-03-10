@@ -16,12 +16,15 @@ call vundle#begin()
  
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree.git'
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'Valloric/YouCompleteMe'
 " Plugin 'rakr/vim-one'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-commentary'
-Plugin 'crusoexia/vim-dracula'
+" Plugin 'crusoexia/vim-dracula'
+Plugin 'dracula/vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'mxw/vim-jsx'
@@ -36,6 +39,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'elzr/vim-json'
 Plugin 'othree/jspc.vim'
 Plugin 'tpope/vim-surround'
+Plugin 'ryanoasis/vim-devicons'
 
 " stop - all plugins above
 call vundle#end()
@@ -44,23 +48,22 @@ call vundle#end()
 filetype plugin indent on
 
 " font
-set guifont=Fira_Code:h15
+set guifont=FiraCode\ Nerd\ Font\ 11
+" set guifont=Fira_Code:h15
 
 " set color
 syntax on
 set t_Co=256
-" set termguicolors
-set background=dark
-let g:one_allow_italics = 1
-let g:dracula_italic = 1
+set termguicolors
 colorscheme dracula
-" highlight Normal ctermbg=NONE
-" highlight nonText ctermbg=NONE
+let g:dracula_italic = 1
+highlight Normal ctermbg=NONE
+highlight nonText ctermbg=NONE
 
 
 " AIRLINE CONFIG
-let g:airline_theme='solarized'
-let g:airline_solarized_bg='dark'
+let g:airline_theme='dracula'
+" let g:airline_solarized_bg='dark'
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
 
@@ -72,6 +75,14 @@ let NERDTreeIgnore=['.DS_Store']
 autocmd vimenter * if @% !~# '.vimrc' && @% !~# '.bash_profile' && @% !~# '.eslintrc.json' && @% !~# '.todo'| NERDTree | endif  " Open NERDTREE when vim opens
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Close vim if only NERDTree is open
 let NERDTreeShowHidden=1
+
+" NERDTree Syntax Highlighting
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:NERDTreeFileExtensionHighlightFullName = 1
+let g:NERDTreeExactMatchHighlightFullName = 1
+let g:NERDTreePatternMatchHighlightFullName = 1
+let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
+let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
 
 " autocmd StdinReadPre " Vim Multi Cursors Key Bindings
 let g:multi_cursor_use_default_mapping=0
@@ -98,32 +109,27 @@ set sidescroll=1  " Auto resize Vim splits to active split
 set backspace=indent,eol,start  " Make backspace key work as expected
 set incsearch     " Show pattern matches as search is typed
 set laststatus=2     " Always show a status line
-set encoding=utf-8   " Natch
+set encoding=utf-8   " Use Utf-8
 set hlsearch        " Highlight previous search pattern
 set ignorecase      " Ignore case in search pattern
 set smartcase       " ^ But be smart about it
 set noshowmode
 
 
-" setting up prettier
-" let g:prettier#autoformat = 0
-" let g:prettier#config#semi = 'false'
-" map <C-P>  :Prettier <CR>
-" autocmd BufWritePre *.js, *.jsx, *.css,*.scss,*.less PrettierAsync
-
 " ALE CONIGURATIONS
-" let g:ale_javascript_eslint_use_global = 1
-" let g:ale_linter_aliases = {'javascript.jsx': 'javascript', 'jsx': 'javascript'}
 let g:ale_linters = {
 \   'javascript': ['eslint'],
-\   'css': ['csslint']
+\   'javascript.jsx': ['eslint'],
+\   'json': ['eslint'],
+\   'css': ['stylelint'],
+\   'scss': ['stylelint']
 \}
 let g:ale_fixers = { 
 \   'javascript': ['prettier', 'eslint'],
-\   'css': ['prettier'],
+\   'css': ['prettier', 'stylelint'],
+\   'scss': ['prettier', 'stylelint'],
 \   'json': ['prettier'],
-\   'markdown': ['prettier'],
-\   'scss': ['prettier']
+\   'markdown': ['prettier']
 \}
 
 let g:ale_javascript_prettier_use_local_config = 1
@@ -132,7 +138,10 @@ let g:ale_sign_column_always = 1
 let g:ale_sign_warning = '>>'
 highlight ALEError ctermbg=none cterm=underline
 highlight ALEWarning ctermbg=none cterm=underline
-let g:ale_fixers['javascript.jsx'] = ['prettier', 'eslint']
+" highlight ALEErrorSign guibg='#823838'
+highlight ALEErrorSign guibg='#810000'
+highlight clear ALEWarningSign
+highlight ALEWarningSign guifg='#F1FA8C'
 let g:ale_fix_on_save = 1
 map <C-P>  :ALEFix <CR>
 
@@ -159,3 +168,4 @@ let g:jsx_ext_required = 0
 set clipboard+=unnamedplus
 
 set guicursor=n:blinkon1
+highlight Comment cterm=italic
