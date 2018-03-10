@@ -20,10 +20,8 @@ Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'Valloric/YouCompleteMe'
-" Plugin 'rakr/vim-one'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-commentary'
-" Plugin 'crusoexia/vim-dracula'
 Plugin 'dracula/vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'jelera/vim-javascript-syntax'
@@ -33,13 +31,14 @@ Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'vim-scripts/JavaScript-Indent'
 Plugin 'w0rp/ale'
 Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plugin 'bling/vim-bufferline'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'elzr/vim-json'
 Plugin 'othree/jspc.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'ryanoasis/vim-devicons'
+Plugin 'nathanaelkane/vim-indent-guides'
 
 " stop - all plugins above
 call vundle#end()
@@ -59,22 +58,36 @@ colorscheme dracula
 let g:dracula_italic = 1
 highlight Normal ctermbg=NONE
 highlight nonText ctermbg=NONE
+" Override some dracula defaults that I don't like
+hi Comment ctermfg=61 ctermbg=NONE cterm=italic guifg=#6272a4 guibg=NONE gui=italic
+hi ErrorMsg ctermfg=16 ctermbg=141 cterm=NONE guifg=#282a36 guibg=#BD93F9 gui=NONE
+hi WarningMsg ctermfg=16 ctermbg=141 cterm=NONE guifg=#282a36 guibg=#BD93F9 gui=NONE
 
+" Indentation Guides
+let g:indent_guides_enable_on_vim_startup = 1
 
 " AIRLINE CONFIG
 let g:airline_theme='dracula'
-" let g:airline_solarized_bg='dark'
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
+" let g:airline_left_sep=''
+" let g:airline_right_sep=''
 
  
 " NERDTree shortcut
 map <F1> :NERDTreeToggle<CR>
+" Show dot files (ie. .vimrc)
 let NERDTreeShowHidden=1
-let NERDTreeIgnore=['.DS_Store']
-autocmd vimenter * if @% !~# '.vimrc' && @% !~# '.bash_profile' && @% !~# '.eslintrc.json' && @% !~# '.todo'| NERDTree | endif  " Open NERDTREE when vim opens
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Close vim if only NERDTree is open
-let NERDTreeShowHidden=1
+let NERDTreeIgnore=['.DS_Store', '.git']
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+" Auto Open NERDTree when vim is opened with no args or when file opened is a
+" directory. Else only open file
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+" Close vim if only NERDTree is open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " NERDTree Syntax Highlighting
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
@@ -135,11 +148,15 @@ let g:ale_fixers = {
 let g:ale_javascript_prettier_use_local_config = 1
 
 let g:ale_sign_column_always = 1
-let g:ale_sign_warning = '>>'
+" let g:ale_sign_warning = '>>'
+" Comment these 2 lines out if your terminal doesn't support emojis
+let g:ale_sign_warning = '⚠️'
+let g:ale_sign_error = '⛔️'
 highlight ALEError ctermbg=none cterm=underline
 highlight ALEWarning ctermbg=none cterm=underline
 " highlight ALEErrorSign guibg='#823838'
-highlight ALEErrorSign guibg='#810000'
+" highlight ALEErrorSign guibg='#810000'
+highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 highlight ALEWarningSign guifg='#F1FA8C'
 let g:ale_fix_on_save = 1
