@@ -7,6 +7,8 @@ set nocompatible
 " filetype func off
 filetype off
 
+" leader = spacebar
+let mapleader = " "
 
 " initialize vundle
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -65,13 +67,18 @@ hi WarningMsg ctermfg=16 ctermbg=141 cterm=NONE guifg=#282a36 guibg=#BD93F9 gui=
 
 " Indentation Guides
 let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#15181F ctermbg=15
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#1E2029 ctermbg=NONE
 
 " AIRLINE CONFIG
 let g:airline_theme='dracula'
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
-" let g:airline_left_sep=''
-" let g:airline_right_sep=''
+let g:airline#extensions#bufferline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:bufferline_echo = 0
+
 
  
 " NERDTree shortcut
@@ -91,6 +98,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " NERDTree Syntax Highlighting
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:WebDevIconsOS = 'Arch'
 let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
@@ -107,6 +115,7 @@ let g:multi_cursor_quit_key='<Esc>'
 
 filetype plugin indent on
 
+set hidden        " allow for hidden buffers
 set tabstop=2     " show existing tab with 2 spaces width
 set shiftwidth=2  " when indenting with '>', use 2 spaces width
 set expandtab     " On pressing tab, insert 2 spaces
@@ -162,7 +171,7 @@ highlight ALEWarningSign guifg='#F1FA8C'
 let g:ale_fix_on_save = 1
 map <C-P>  :ALEFix <CR>
 
-" clears vims search highlight with esc
+" clears vims search highlight with F2
 nnoremap  <silent> <F2> :noh<cr>
 noh
 
@@ -174,6 +183,21 @@ nnoremap <C-H> <C-W><C-H>
 " more natural splits
 set splitbelow
 set splitright
+" Easier Buffer Switching
+nnoremap <Leader>h :bp<CR>
+nnoremap <Leader>l :bn<CR>
+nnoremap <Leader>1 :b1<CR>
+nnoremap <Leader>2 :b2<CR>
+nnoremap <Leader>3 :b3<CR>
+nnoremap <Leader>4 :b4<CR>
+nnoremap <Leader>5 :b5<CR>
+nnoremap <Leader>6 :b6<CR>
+nnoremap <Leader>7 :b7<CR>
+nnoremap <Leader>8 :b8<CR>
+nnoremap <Leader>9 :b9<CR>
+
+" Get Rid of Git Gutters key mappings
+let g:gitgutter_map_keys = 0
 
 " my javascript libraries
 let g:used_javascript_libs = 'angularjs,react,jquery,underscore,angularuirouter,flux,requirejs,jasmine,chai,d3'
@@ -185,4 +209,3 @@ let g:jsx_ext_required = 0
 set clipboard+=unnamedplus
 
 set guicursor=n:blinkon1
-highlight Comment cterm=italic
