@@ -3,7 +3,7 @@
 Hi, I'm Jazzy!
 I :heart: nerding out about NeoVim and customizing the editor!
 
-![Vim Screenshot](https://github.com/jasminabasurita/.vim/vim.png)
+![Vim Screenshot](https://github.com/jasminabasurita/.vim/blob/master/vim.png)
 
 | Packages I Use:                 |                                                    How I feel about them |
 | ------------------------------- | -----------------------------------------------------------------------: |
