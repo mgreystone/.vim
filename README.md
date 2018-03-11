@@ -46,6 +46,10 @@ I :heart: nerding out about NeoVim and customizing the editor!
 |     `<F1>`     |      Toggle nerd tree       |
 |     `<F2>`     |  Clear search highlighting  |
 |    `Ctrl+P`    | :AleFix _i.e. use Prettier_ |
+|   `Shift+H`    |      Beginning of line      |
+|   `Shift+L`    |         End of line         |
+|   `Shift+J`    |        Down 4 lines         |
+|   `Shift+K`    |         Up 4 lines          |
 
 ### Usage
 

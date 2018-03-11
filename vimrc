@@ -186,6 +186,19 @@ nnoremap <Leader>6 :b6<CR>
 nnoremap <Leader>7 :b7<CR>
 nnoremap <Leader>8 :b8<CR>
 nnoremap <Leader>9 :b9<CR>
+" Faster Navigation
+nnoremap H \|
+nnoremap L $
+nnoremap J 4j
+nnoremap K 4k
+vnoremap H \|
+vnoremap L $
+vnoremap J 4j
+vnoremap K 4k
+onoremap H \|
+onoremap L $
+onoremap J 4j
+onoremap K 4k
 
 " Get Rid of Git Gutters key mappings
 let g:gitgutter_map_keys = 0
