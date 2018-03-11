@@ -1,9 +1,9 @@
-# Jazzy's NeoVimrc
+# Jazzy's NeoVim
 
 Hi, I'm Jazzy!
-I :heart: nerding out about NeoVim and customizing the editor!
+I :heart: nerding out about ![NeoVim](https://raw.githubusercontent.com/neovim/neovim.github.io/master/logos/favicon.ico) and customizing the editor!
 
-![Vim Screenshot](https://github.com/jasminabasurita/.vim/blob/master/vim.png)
+![Vim Screenshot](https://raw.githubusercontent.com/jasminabasurita/.vim/master/vim.png)
 
 | Packages I Use:                 |                                                    How I feel about them |
 | ------------------------------- | -----------------------------------------------------------------------: |
