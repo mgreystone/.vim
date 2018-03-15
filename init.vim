@@ -1,10 +1,10 @@
 " ~/.vimrc
-
 " no vi compat
 set nocompatible
 
-" filetype func off
+" filetype func
 filetype off
+filetype plugin indent on
 
 " leader = spacebar
 let mapleader = " "
@@ -12,13 +12,14 @@ let mapleader = " "
 " I like to use the ~/.vim directory instead of the ~/.config/nvim directory
 set rtp+=~/.vim
 
-" initialize plug
+" Plug
 call plug#begin('~/.vim/plugged')
 " start- all plugins below
- 
+
 Plug 'scrooloose/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'moll/vim-bbye'
 
 if has("python3")
   Plug 'roxma/nvim-completion-manager'
@@ -36,7 +37,7 @@ Plug 'othree/javascript-libraries-syntax.vim', {'for': 'javascript'}
 Plug 'vim-scripts/JavaScript-Indent', {'for': 'javascript'}
 Plug 'w0rp/ale'
 Plug 'bling/vim-airline'
-Plug 'bling/vim-bufferline'
+" Plug 'bling/vim-bufferline'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'elzr/vim-json'
@@ -58,9 +59,6 @@ Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 
 " stop - all plugins above
 call plug#end()
-
-" filetype func on
-filetype plugin indent on
 
 " font
 set guifont=FiraCode\ Nerd\ Font\ 11
@@ -92,17 +90,17 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#1E2029 ctermbg=NONE
 let g:airline_theme='dracula'
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
-let g:airline#extensions#bufferline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:bufferline_echo = 0
 
-
+" Save and Reload Folds!
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview
  
+" NERDTREE
 " NERDTree shortcut
-map <F1> :NERDTreeToggle<CR>
+noremap <F1> :NERDTreeToggle<CR>
 " Show dot files (ie. .vimrc)
 let NERDTreeShowHidden=1
-let NERDTreeIgnore=['.DS_Store']
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 " Auto Open NERDTree when vim is opened with no args or when file opened is a
@@ -122,11 +120,11 @@ let g:NERDTreePatternMatchHighlightFullName = 1
 let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
 let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
 
-filetype plugin indent on
-
+" Built in Vim Settings
 set hidden        " allow for modified buffers to be in the background, makes buffers feel more like tabs
 set tabstop=2     " show existing tab with 2 spaces width
 set shiftwidth=2  " when indenting with '>', use 2 spaces width
+set shiftround    " Round to the nearest tab
 set expandtab     " On pressing tab, insert 2 spaces
 set autoindent    " Enable auto-indent
 set smarttab      " Tab smarter
@@ -145,7 +143,8 @@ set hlsearch        " Highlight previous search pattern
 set ignorecase      " Ignore case in search pattern
 set smartcase       " ^ But be smart about it
 set noshowmode
-
+set clipboard+=unnamedplus " set system clipboard as the default register
+set guicursor=n:blinkon1
 
 " ALE CONIGURATIONS
 let g:ale_linters = {
@@ -178,7 +177,7 @@ highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 highlight ALEWarningSign guifg='#F1FA8C'
 let g:ale_fix_on_save = 1
-map <C-P>  :ALEFix <CR>
+noremap <C-P>  :ALEFix <CR>
 
 " NVIM Completion Manager
 " use (shift +) tab to select
@@ -187,13 +186,15 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " Set enter to close menu instead of line break
 inoremap <expr> <CR> (pumvisible() ? "\<C-y>" : "\<CR>")
 
-
+" My Key Mappings
 " clears vims search highlight with F2
 nnoremap  <silent> <F2> :noh<cr>
 noh
-
 " Exit insert mode with ease
 inoremap jk <Esc>
+" capitalize a word in insert or normal mode
+inoremap <C-u> <Esc>viwUea
+nnoremap <C-u> viwUe
 " Easier Split Navigation
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -202,6 +203,8 @@ nnoremap <C-H> <C-W><C-H>
 " more natural splits
 set splitbelow
 set splitright
+" Delete Buffer without closing window
+nnoremap <Leader>q :Bdelete<CR>
 " Easier Buffer Switching
 nnoremap <Leader>h :bp<CR>
 nnoremap <Leader>l :bn<CR>
@@ -227,6 +230,10 @@ onoremap H ^
 onoremap L $
 onoremap J 4j
 onoremap K 4k
+" Make it easier to open and edit vim whenever!
+nnoremap <leader>ev :edit $MYVIMRC<cr>
+" And resource the vimrc with ease!
+nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Get Rid of Git Gutters key mappings
 let g:gitgutter_map_keys = 0
@@ -236,8 +243,3 @@ let g:used_javascript_libs = 'angularjs,react,jquery,underscore,angularuirouter,
 
 " vim-jsx - allow syntax highlighting in .js files
 let g:jsx_ext_required = 0
-
-" set system clipboard as the default register
-set clipboard+=unnamedplus
-
-set guicursor=n:blinkon1
