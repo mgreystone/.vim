@@ -30,6 +30,7 @@ I :heart: nerding out about ![NeoVim](https://raw.githubusercontent.com/neovim/n
 | jspc.vim                        |                                         keep track of recurring strings! |
 | vim-surround                    |                    Again, I love not having to type both brackets myself |
 | vim-indent-guides               |                    adds solid bars to indentations for better visibility |
+| vim-markdown-composer           |                        _auto-live-renders_ mardown to html in browser!!! |
 
 ### My Key Mappings
 

@@ -1,5 +1,4 @@
 " ~/.vimrc
-"
 
 " no vi compat
 set nocompatible
@@ -10,39 +9,55 @@ filetype off
 " leader = spacebar
 let mapleader = " "
 
-" initialize vundle
-set rtp+=~/.vim/bundle/Vundle.vim
+" I like to use the ~/.vim directory instead of the ~/.config/nvim directory
+set rtp+=~/.vim
 
-call vundle#begin()
+" initialize plug
+call plug#begin('~/.vim/plugged')
 " start- all plugins below
  
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/nerdtree.git'
-Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'tpope/vim-commentary'
-Plugin 'dracula/vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'mxw/vim-jsx'
-Plugin 'othree/javascript-libraries-syntax.vim'
-" Plugin 'marijnh/tern_for_vim'
-Plugin 'vim-scripts/JavaScript-Indent'
-Plugin 'w0rp/ale'
-Plugin 'bling/vim-airline'
-Plugin 'bling/vim-bufferline'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'elzr/vim-json'
-Plugin 'othree/jspc.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'ryanoasis/vim-devicons'
-Plugin 'nathanaelkane/vim-indent-guides'
+Plug 'scrooloose/nerdtree'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+if has("python3")
+  Plug 'roxma/nvim-completion-manager'
+  Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
+  Plug 'othree/csscomplete.vim'
+endif
+
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-commentary'
+Plug 'dracula/vim'
+Plug 'pangloss/vim-javascript', {'for': 'javascript'}
+Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
+Plug 'mxw/vim-jsx', {'for': 'javascript'}
+Plug 'othree/javascript-libraries-syntax.vim', {'for': 'javascript'}
+Plug 'vim-scripts/JavaScript-Indent', {'for': 'javascript'}
+Plug 'w0rp/ale'
+Plug 'bling/vim-airline'
+Plug 'bling/vim-bufferline'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'elzr/vim-json'
+Plug 'othree/jspc.vim'
+Plug 'tpope/vim-surround'
+Plug 'ryanoasis/vim-devicons'
+Plug 'nathanaelkane/vim-indent-guides'
+" Build Composer function for markdown composer
+function! BuildComposer(info)
+  if a:info.status != 'unchanged' || a:info.force
+    if has('nvim')
+      !cargo build --release
+    else
+      !cargo build --release --no-default-features --features json-rpc
+    endif
+  endif
+endfunction
+Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 
 " stop - all plugins above
-call vundle#end()
+call plug#end()
 
 " filetype func on
 filetype plugin indent on
@@ -64,6 +79,9 @@ hi Comment ctermfg=61 ctermbg=NONE cterm=italic guifg=#6272a4 guibg=NONE gui=ita
 hi ErrorMsg ctermfg=16 ctermbg=141 cterm=NONE guifg=#282a36 guibg=#BD93F9 gui=NONE
 hi WarningMsg ctermfg=16 ctermbg=141 cterm=NONE guifg=#282a36 guibg=#BD93F9 gui=NONE
 
+" vim-markdown-composer
+let g:markdown_composer_syntax_theme='dracula'
+
 " Indentation Guides
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
@@ -84,7 +102,7 @@ let g:bufferline_echo = 0
 map <F1> :NERDTreeToggle<CR>
 " Show dot files (ie. .vimrc)
 let NERDTreeShowHidden=1
-let NERDTreeIgnore=['.DS_Store', '.git']
+let NERDTreeIgnore=['.DS_Store']
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 " Auto Open NERDTree when vim is opened with no args or when file opened is a
@@ -106,7 +124,7 @@ let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
 
 filetype plugin indent on
 
-set hidden        " allow for hidden buffers
+set hidden        " allow for modified buffers to be in the background, makes buffers feel more like tabs
 set tabstop=2     " show existing tab with 2 spaces width
 set shiftwidth=2  " when indenting with '>', use 2 spaces width
 set expandtab     " On pressing tab, insert 2 spaces
@@ -162,10 +180,20 @@ highlight ALEWarningSign guifg='#F1FA8C'
 let g:ale_fix_on_save = 1
 map <C-P>  :ALEFix <CR>
 
+" NVIM Completion Manager
+" use (shift +) tab to select
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" Set enter to close menu instead of line break
+inoremap <expr> <CR> (pumvisible() ? "\<C-y>" : "\<CR>")
+
+
 " clears vims search highlight with F2
 nnoremap  <silent> <F2> :noh<cr>
 noh
 
+" Exit insert mode with ease
+inoremap jk <Esc>
 " Easier Split Navigation
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
