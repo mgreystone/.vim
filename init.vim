@@ -192,6 +192,8 @@ nnoremap  <silent> <F2> :noh<cr>
 noh
 " Exit insert mode with ease
 inoremap jk <Esc>
+" In the terminal too!
+tnoremap jk <C-\><C-N>
 " capitalize a word in insert or normal mode
 inoremap <C-u> <Esc>viwUea
 nnoremap <C-u> viwUe
