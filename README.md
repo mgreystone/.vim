@@ -55,15 +55,6 @@ I :heart: nerding out about ![NeoVim](https://raw.githubusercontent.com/neovim/n
 ### Usage
 
 1.  clone to user home
-2.  symlink to appropriate place
-
-* for NeoVim `ln -s ~/.vim/vimrc ~/.config/nvim/init.vim`
-* for Vim `ln -s ~/.vim/vimrc ~/.vimrc`
-
-3.  clone Vundle
-
-* `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
-
-4.  Install YouCompleteMe following [this](https://github.com/Valloric/YouCompleteMe)
-5.  Open NeoVim or Vim and run `:PluginInstall`
-6.  Restart NeoVim/Vim and enjoy!
+2.  cd into this repo
+3.  run `./neoVimInit.sh` or `./vimInit.sh` depending on which editor you use
+4.  enjoy!
