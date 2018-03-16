@@ -28,6 +28,8 @@ if has("python3")
 endif
 
 Plug 'jiangmiao/auto-pairs'
+let g:AutoPairsMultilineClose = 0 " disable line jumping for closing pair
+
 Plug 'tpope/vim-commentary'
 Plug 'dracula/vim'
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
