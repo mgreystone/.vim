@@ -94,12 +94,13 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " Save and Reload Folds!
 autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview
+autocmd BufWinEnter *.* silent! loadview
  
 " NERDTREE
 " NERDTree shortcut
 noremap <F1> :NERDTreeToggle<CR>
 " Show dot files (ie. .vimrc)
+let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
