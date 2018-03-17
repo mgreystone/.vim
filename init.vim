@@ -93,6 +93,7 @@ let g:airline_theme='dracula'
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#ale#enabled=1
 
 " Save and Reload Folds!
 autocmd BufWinLeave *.* mkview
@@ -168,16 +169,17 @@ let g:ale_fixers = {
 let g:ale_javascript_prettier_use_local_config = 1
 
 let g:ale_sign_column_always = 1
-" let g:ale_sign_warning = '>>'
+let g:ale_sign_warning = '>>'
 " Comment these 2 lines out if your terminal doesn't support emojis
-let g:ale_sign_warning = '⚠️'
-let g:ale_sign_error = '⛔️'
-highlight ALEError ctermbg=none cterm=underline
-highlight ALEWarning ctermbg=none cterm=underline
-" highlight ALEErrorSign guibg='#823838'
+" let g:ale_sign_warning = '⚠️'
+" let g:ale_sign_error = '⛔️'
+highlight ALEError ctermbg=none guibg=none cterm=underline gui=underline
+highlight ALEWarning ctermbg=none guibg=none cterm=underline gui=underline
 " highlight ALEErrorSign guibg='#810000'
+" highlight ALEErrorSign guibg='#823838'
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
+highlight ALEErrorSign guibg='#5F0000' gui=underline
 highlight ALEWarningSign guifg='#F1FA8C'
 let g:ale_fix_on_save = 1
 noremap <C-P>  :ALEFix <CR>
