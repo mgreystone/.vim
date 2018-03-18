@@ -237,10 +237,29 @@ onoremap H ^
 onoremap L $
 onoremap J 4j
 onoremap K 4k
+" Add Punctuation to end of line or line break
+nnoremap <leader><CR> i<CR><Esc>
+nnoremap <leader>; $a;<Esc>
+nnoremap <leader>, $a,<Esc>
+" Add Symbol after Cursor
+nnoremap <leader>} a}<Esc>
+nnoremap <leader>) a)<Esc>
+nnoremap <leader>] a]<Esc>
+nnoremap <leader>" a"<Esc>
+nnoremap <leader>' a'<Esc>
+" Surround Selection in /* */
+vnoremap <leader>/* <Esc>`>a*/<Esc>`<i/*<Esc>
 " Make it easier to open and edit vim whenever!
-nnoremap <leader>ev :edit $MYVIMRC<cr>
+nnoremap <leader>ev :edit ~/.vim/init.vim <cr>
 " And resource the vimrc with ease!
 nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" My Abbreviations
+iabbrev @@ jasminejacquelin@gmail.com
+iabbrev ireact import React from "react"
+iabbrev ireactrouter import {  } from "react-router-dom"
+iabbrev iaxios import axios from "axios"
+iabbrev rrouter const router = require("express").Router()
 
 " Get Rid of Git Gutters key mappings
 let g:gitgutter_map_keys = 0
