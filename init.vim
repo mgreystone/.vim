@@ -47,6 +47,7 @@ Plug 'othree/jspc.vim'
 Plug 'tpope/vim-surround'
 Plug 'ryanoasis/vim-devicons'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'ap/vim-css-color'
 " Build Composer function for markdown composer
 function! BuildComposer(info)
   if a:info.status != 'unchanged' || a:info.force
@@ -269,3 +270,7 @@ let g:used_javascript_libs = 'angularjs,react,jquery,underscore,angularuirouter,
 
 " vim-jsx - allow syntax highlighting in .js files
 let g:jsx_ext_required = 0
+
+" Save Files With Root Priveleges
+command! -nargs=0 Sw w !sudo tee % > /dev/null
+
