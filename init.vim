@@ -1,4 +1,5 @@
 " ~/.vimrc
+
 " no vi compat
 set nocompatible
 
@@ -7,10 +8,10 @@ filetype off
 filetype plugin indent on
 
 " leader = spacebar
-let mapleader = " "
+let g:mapleader = ' '
 
 " I like to use the ~/.vim directory instead of the ~/.config/nvim directory
-set rtp+=~/.vim
+set runtimepath+=~/.vim
 
 " Plug
 call plug#begin('~/.vim/plugged')
@@ -21,7 +22,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'moll/vim-bbye'
 
-if has("python3")
+if has('python3')
   Plug 'roxma/nvim-completion-manager'
   Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
   Plug 'othree/csscomplete.vim'
@@ -31,15 +32,13 @@ Plug 'jiangmiao/auto-pairs'
 let g:AutoPairsMultilineClose = 0 " disable line jumping for closing pair
 
 Plug 'tpope/vim-commentary'
-Plug 'dracula/vim'
+Plug 'jasminabasurita/NeoDim', {'frozen': true}
+Plug 'dracula/vim' " , {'commit': '0743d3d7b3769d012827bc8d1e5375164791cc2f'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
-Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
 Plug 'mxw/vim-jsx', {'for': 'javascript'}
-Plug 'othree/javascript-libraries-syntax.vim', {'for': 'javascript'}
-Plug 'vim-scripts/JavaScript-Indent', {'for': 'javascript'}
+Plug 'farfanoide/vim-kivy'
 Plug 'w0rp/ale'
 Plug 'bling/vim-airline'
-" Plug 'bling/vim-bufferline'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'elzr/vim-json'
@@ -71,14 +70,14 @@ set guifont=FiraCode\ Nerd\ Font\ 11
 syntax on
 set t_Co=256
 set termguicolors
-colorscheme dracula
-let g:dracula_italic = 1
+colorscheme neodim
+let g:neodim_italic = 1
 highlight Normal ctermbg=NONE
 highlight nonText ctermbg=NONE
 " Override some dracula defaults that I don't like
-hi Comment ctermfg=61 ctermbg=NONE cterm=italic guifg=#6272a4 guibg=NONE gui=italic
-hi ErrorMsg ctermfg=16 ctermbg=141 cterm=NONE guifg=#282a36 guibg=#BD93F9 gui=NONE
-hi WarningMsg ctermfg=16 ctermbg=141 cterm=NONE guifg=#282a36 guibg=#BD93F9 gui=NONE
+" hi Comment ctermfg=61 ctermbg=NONE cterm=italic guifg=#6272a4 guibg=NONE gui=italic
+" hi ErrorMsg ctermfg=16 ctermbg=141 cterm=NONE guifg=#282a36 guibg=#BD93F9 gui=NONE
+" hi WarningMsg ctermfg=16 ctermbg=141 cterm=NONE guifg=#282a36 guibg=#BD93F9 gui=NONE
 
 " vim-markdown-composer
 let g:markdown_composer_syntax_theme='dracula'
@@ -104,10 +103,10 @@ autocmd BufWinEnter *.* silent! loadview
 " NERDTree shortcut
 noremap <F1> :NERDTreeToggle<CR>
 " Show dot files (ie. .vimrc)
-let NERDTreeQuitOnOpen=1
-let NERDTreeShowHidden=1
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
+let g:NERDTreeQuitOnOpen=1
+let g:NERDTreeShowHidden=1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeDirArrows = 1
 " Auto Open NERDTree when vim is opened with no args or when file opened is a
 " directory. Else only open file
 autocmd StdinReadPre * let s:std_in=1
@@ -126,6 +125,7 @@ let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exac
 let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
 
 " Built in Vim Settings
+set cursorline    " highlight current line
 set hidden        " allow for modified buffers to be in the background, makes buffers feel more like tabs
 set tabstop=2     " show existing tab with 2 spaces width
 set shiftwidth=2  " when indenting with '>', use 2 spaces width
@@ -144,6 +144,7 @@ set backspace=indent,eol,start  " Make backspace key work as expected
 set incsearch     " Show pattern matches as search is typed
 set laststatus=2     " Always show a status line
 set encoding=utf-8   " Use Utf-8
+scriptencoding utf-8
 set hlsearch        " Highlight previous search pattern
 set ignorecase      " Ignore case in search pattern
 set smartcase       " ^ But be smart about it
@@ -156,11 +157,14 @@ let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'javascript.jsx': ['eslint'],
 \   'json': ['eslint'],
+\   'python': ['flake8'],
 \   'css': ['stylelint'],
-\   'scss': ['stylelint']
+\   'scss': ['stylelint'],
+\   'vim': ['vint']
 \}
 let g:ale_fixers = { 
 \   'javascript': ['prettier', 'eslint'],
+\   'python': ['autopep8', 'yapf'],
 \   'css': ['prettier', 'stylelint'],
 \   'scss': ['prettier', 'stylelint'],
 \   'json': ['prettier'],
