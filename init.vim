@@ -32,7 +32,7 @@ Plug 'jiangmiao/auto-pairs'
 let g:AutoPairsMultilineClose = 0 " disable line jumping for closing pair
 
 Plug 'tpope/vim-commentary'
-Plug 'jasminabasurita/NeoDim', {'frozen': true}
+Plug 'jasminabasurita/NeoDim', {'frozen': 1}
 Plug 'dracula/vim' " , {'commit': '0743d3d7b3769d012827bc8d1e5375164791cc2f'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'mxw/vim-jsx', {'for': 'javascript'}
