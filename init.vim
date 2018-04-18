@@ -89,7 +89,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#15181F ctermbg=15
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#1E2029 ctermbg=NONE
 
 " AIRLINE CONFIG
-let g:airline_theme='dracula'
+let g:airline_theme='neodim'
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#buffer_nr_show = 1
