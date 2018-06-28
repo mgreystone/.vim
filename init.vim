@@ -163,13 +163,19 @@ let g:ale_linters = {
 \   'vim': ['vint']
 \}
 let g:ale_fixers = { 
-\   'javascript': ['prettier', 'eslint'],
+\   'javascript': ['eslint'],
 \   'python': ['autopep8', 'yapf'],
-\   'css': ['prettier', 'stylelint'],
-\   'scss': ['prettier', 'stylelint'],
+\   'css': ['stylelint'],
+\   'scss': ['stylelint'],
 \   'json': ['prettier'],
 \   'markdown': ['prettier']
 \}
+
+" with prettier
+" \   'javascript': ['prettier', eslint'],
+" \   'css': ['prettier', 'stylelint'],
+" \   'scss': ['prettier', 'stylelint'],
+" \   'json': ['prettier'],
 
 let g:ale_javascript_prettier_use_local_config = 1
 
