@@ -37,6 +37,17 @@ Plug 'dracula/vim' " , {'commit': '0743d3d7b3769d012827bc8d1e5375164791cc2f'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'mxw/vim-jsx', {'for': 'javascript'}
 Plug 'farfanoide/vim-kivy'
+Plug 'mileszs/ack.vim'
+nnoremap <leader>ag :Ack<space>
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+Plug 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$|bower_components|node_modules',
+  \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\',
+\ }
 Plug 'w0rp/ale'
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
@@ -163,13 +174,19 @@ let g:ale_linters = {
 \   'vim': ['vint']
 \}
 let g:ale_fixers = { 
-\   'javascript': ['prettier', 'eslint'],
+\   'javascript': ['eslint'],
 \   'python': ['autopep8', 'yapf'],
-\   'css': ['prettier', 'stylelint'],
-\   'scss': ['prettier', 'stylelint'],
+\   'css': ['stylelint'],
+\   'scss': ['stylelint'],
 \   'json': ['prettier'],
 \   'markdown': ['prettier']
 \}
+
+" with prettier
+" \   'javascript': ['prettier', eslint'],
+" \   'css': ['prettier', 'stylelint'],
+" \   'scss': ['prettier', 'stylelint'],
+" \   'json': ['prettier'],
 
 let g:ale_javascript_prettier_use_local_config = 1
 
@@ -187,7 +204,7 @@ highlight clear ALEWarningSign
 highlight ALEErrorSign guibg='#5F0000' gui=underline
 highlight ALEWarningSign guifg='#F1FA8C'
 let g:ale_fix_on_save = 1
-noremap <C-P>  :ALEFix <CR>
+noremap <C-F>  :ALEFix <CR>
 
 " NVIM Completion Manager
 " use (shift +) tab to select
@@ -253,18 +270,23 @@ nnoremap <leader>] a]<Esc>
 nnoremap <leader>" a"<Esc>
 nnoremap <leader>' a'<Esc>
 " Surround Selection in /* */
-vnoremap <leader>/* <Esc>`>a*/<Esc>`<i/*<Esc>
+vnoremap <leader>/ <Esc>`>a*/<Esc>`<i/*<Esc>
+" React comment
+vnoremap <leader>rc <Esc>`>a*/}<Esc>`<i{/*<Esc>
 " Make it easier to open and edit vim whenever!
 nnoremap <leader>ev :edit ~/.vim/init.vim <cr>
 " And resource the vimrc with ease!
 nnoremap <leader>sv :source $MYVIMRC<cr>
+" Moving through grep
+nnoremap <leader>n :cn<CR>
+nnoremap <leader>p :cp<CR>
 
 " My Abbreviations
 iabbrev @@ jasminejacquelin@gmail.com
-iabbrev ireact import React from "react"
-iabbrev ireactrouter import {  } from "react-router-dom"
-iabbrev iaxios import axios from "axios"
-iabbrev rrouter const router = require("express").Router()
+iabbrev ireact import React from 'react'
+iabbrev ireactrouter import {  } from 'react-router-dom'
+iabbrev iaxios import axios from 'axios'
+iabbrev rrouter const router = require('express').Router()
 
 " Get Rid of Git Gutters key mappings
 let g:gitgutter_map_keys = 0
