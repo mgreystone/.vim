@@ -12,7 +12,7 @@ I :heart: nerding out about ![NeoVim](https://raw.githubusercontent.com/neovim/n
 | vim-nerdtree-syntax-highlight   |                     Highlights nerdtree files and folders based on types |
 | nerdtree-git-plugin             |                            Adds symbols when files have unstaged changes |
 | vim-devicons                    |                                       Adds icons to nerdtree and airline |
-| YouCompleteMe                   | So Helpful, keeps track of paths, variable names and built in functions! |
+| ncm2                   | So Helpful, keeps track of paths, variable names and built in functions! |
 | auto-pairs                      |                        closes brackets and quotes! what's not to love?!? |
 | vim-commentary                  |                                       Comment things out quick and easy! |
 | vim-dracula                     |                                   Clean & simple theme, easy on the eyes |
@@ -46,7 +46,8 @@ I :heart: nerding out about ![NeoVim](https://raw.githubusercontent.com/neovim/n
 |    `Ctrl+K`    |     Switch to top tile      |
 |     `<F1>`     |      Toggle nerd tree       |
 |     `<F2>`     |  Clear search highlighting  |
-|    `Ctrl+P`    | :AleFix _i.e. use Prettier_ |
+|    `Ctrl+F`    | :AleFix _i.e. use Prettier_ |
+|    `Ctrl+P`    | Fuzzy Search |
 |   `Shift+H`    |      Beginning of line      |
 |   `Shift+L`    |         End of line         |
 |   `Shift+J`    |        Down 4 lines         |
