@@ -37,9 +37,20 @@ I :heart: nerding out about ![NeoVim](https://raw.githubusercontent.com/neovim/n
 |      Keys      |        What they do         |
 | :------------: | :-------------------------: |
 |   `spacebar`   |      Mapped to leader       |
+|   `leader+ag`   |       search with ag       |
 |   `leader+H`   |       Previous Buffer       |
 |   `leader+L`   |         Next Buffer         |
 | `leader+<1-9>` |     Switch to buffer #      |
+|   `leader+Enter`   |         line break         |
+|   `leader+;`   |         add semicolon to EOL         |
+|   `leader+,`   |         add comma to EOL         |
+|   `leader+}`   |         add closing curly bracket after cursor         |
+|   `leader+]`   |         add closing square bracket after cursor         |
+|   `leader+)`   |         add closing parren after cursor         |
+|   `leader+"`   |         add double quote after cursor         |
+|   `leader+'`   |         add single quote after cursor         |
+|   `leader+rc`   |        surround visual selection in a _react comment_ (i.e. {/* your comment here */})         |
+|   `leader+/`   |        surround visual selection in an inline js comment /* */         |
 |    `Ctrl+H`    |     Switch to left tile     |
 |    `Ctrl+L`    |    Switch to right tile     |
 |    `Ctrl+J`    |    Switch to bottom tile    |
@@ -52,6 +63,8 @@ I :heart: nerding out about ![NeoVim](https://raw.githubusercontent.com/neovim/n
 |   `Shift+L`    |         End of line         |
 |   `Shift+J`    |        Down 4 lines         |
 |   `Shift+K`    |         Up 4 lines          |
+|   `jk`    |         exit insert mode          |
+|   `Ctrl+U`    |         capitalize word          |
 
 ### Usage
 

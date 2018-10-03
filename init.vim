@@ -98,6 +98,8 @@ highlight Difftext ctermbg=NONE guibg=NONE
 
 " vim-markdown-composer
 let g:markdown_composer_syntax_theme='dracula'
+let g:markdown_composer_autostart=0
+nnoremap <C-m> :ComposerStart<CR>
 
 " Indentation Guides
 let g:indent_guides_enable_on_vim_startup = 1
