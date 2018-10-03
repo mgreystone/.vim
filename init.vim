@@ -79,14 +79,10 @@ function! BuildComposer(info)
     endif
   endif
 endfunction
-Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+" Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 
 " stop - all plugins above
 call plug#end()
-
-" font
-set guifont=FiraCode\ Nerd\ Font\ 11
-" set guifont=Fira_Code:h15
 
 " set color
 set termguicolors
@@ -118,12 +114,18 @@ autocmd BufWinEnter *.* silent! loadview
  
 " NERDTREE
 " NERDTree shortcut
-nnoremap <F1> :e.<CR>
+noremap <F1> :NERDTreeToggle<CR>
 " Show dot files (ie. .vimrc)
 let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeShowHidden=1
-let g:NERDTreeMinimalUI=1
-let g:NERDTreeDirArrows=1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeDirArrows = 1
+" Auto Open NERDTree when vim is opened with no args or when file opened is a
+" directory. Else only open file
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+" Close vim if only NERDTree is open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " NERDTree Syntax Highlighting
@@ -193,18 +195,13 @@ let g:ale_javascript_prettier_use_local_config = 1
 
 let g:ale_sign_column_always = 1
 let g:ale_sign_warning = '>>'
-" Comment these 2 lines out if your terminal doesn't support emojis
-" let g:ale_sign_warning = '⚠️'
-" let g:ale_sign_error = '⛔️'
 highlight ALEError ctermbg=none guibg=none cterm=underline gui=underline
 highlight ALEWarning ctermbg=none guibg=none cterm=underline gui=underline
-" highlight ALEErrorSign guibg='#810000'
-" highlight ALEErrorSign guibg='#823838'
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 highlight ALEErrorSign guibg='#5F0000' gui=underline
 highlight ALEWarningSign guifg='#F1FA8C'
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 noremap <C-F>  :ALEFix <CR>
 
 " My Key Mappings
@@ -278,7 +275,6 @@ nnoremap <leader>n :cn<CR>
 nnoremap <leader>p :cp<CR>
 
 " My Abbreviations
-iabbrev @@ jasminejacquelin@gmail.com
 iabbrev ireact import React from 'react'
 iabbrev ireactrouter import {  } from 'react-router-dom'
 iabbrev iaxios import axios from 'axios'
