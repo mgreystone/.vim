@@ -18,27 +18,38 @@ call plug#begin('~/.vim/plugged')
 " start- all plugins below
 
 Plug 'scrooloose/nerdtree'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'moll/vim-bbye'
 
 if has('python3')
-  Plug 'roxma/nvim-completion-manager'
-  Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
-  Plug 'othree/csscomplete.vim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'ncm2/ncm2'
+  Plug 'ncm2/ncm2-path'
+  Plug 'ncm2/ncm2-bufword'
+  " Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
+  Plug 'ncm2/ncm2-cssomni'
+
+  autocmd BufEnter * call ncm2#enable_for_buffer()
+  set completeopt=noinsert,menuone,noselect
+  set shortmess+=c
+  inoremap <expr> <CR> (pumvisible() ? "\<C-y>" : "\<CR>")
+  inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 endif
 
 Plug 'jiangmiao/auto-pairs'
 let g:AutoPairsMultilineClose = 0 " disable line jumping for closing pair
+let g:AutoPairsMapCR = 1
 
 Plug 'tpope/vim-commentary'
 Plug 'jasminabasurita/NeoDim', {'frozen': 1}
 Plug 'dracula/vim' " , {'commit': '0743d3d7b3769d012827bc8d1e5375164791cc2f'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
-Plug 'mxw/vim-jsx', {'for': 'javascript'}
+Plug 'mxw/vim-jsx'
 Plug 'farfanoide/vim-kivy'
 Plug 'mileszs/ack.vim'
-nnoremap <leader>ag :Ack<space>
+nnoremap <leader>ag :Ack!<space>
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
 Plug 'ctrlpvim/ctrlp.vim'
@@ -78,17 +89,12 @@ set guifont=FiraCode\ Nerd\ Font\ 11
 " set guifont=Fira_Code:h15
 
 " set color
-syntax on
-set t_Co=256
 set termguicolors
 colorscheme neodim
 let g:neodim_italic = 1
 highlight Normal ctermbg=NONE
 highlight nonText ctermbg=NONE
-" Override some dracula defaults that I don't like
-" hi Comment ctermfg=61 ctermbg=NONE cterm=italic guifg=#6272a4 guibg=NONE gui=italic
-" hi ErrorMsg ctermfg=16 ctermbg=141 cterm=NONE guifg=#282a36 guibg=#BD93F9 gui=NONE
-" hi WarningMsg ctermfg=16 ctermbg=141 cterm=NONE guifg=#282a36 guibg=#BD93F9 gui=NONE
+highlight Difftext ctermbg=NONE guibg=NONE
 
 " vim-markdown-composer
 let g:markdown_composer_syntax_theme='dracula'
@@ -106,34 +112,27 @@ let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#ale#enabled=1
 
-" Save and Reload Folds!
+" " Save and Reload Folds!
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent! loadview
  
 " NERDTREE
 " NERDTree shortcut
-noremap <F1> :NERDTreeToggle<CR>
+nnoremap <F1> :e.<CR>
 " Show dot files (ie. .vimrc)
 let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeShowHidden=1
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeDirArrows = 1
-" Auto Open NERDTree when vim is opened with no args or when file opened is a
-" directory. Else only open file
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-" Close vim if only NERDTree is open
+let g:NERDTreeMinimalUI=1
+let g:NERDTreeDirArrows=1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " NERDTree Syntax Highlighting
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:WebDevIconsOS = 'Arch'
-let g:NERDTreeFileExtensionHighlightFullName = 1
+" let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
 let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
-let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
+let g:NERDTreeLimitedSyntax=1
 
 " Built in Vim Settings
 set cursorline    " highlight current line
@@ -162,6 +161,8 @@ set smartcase       " ^ But be smart about it
 set noshowmode
 set clipboard+=unnamedplus " set system clipboard as the default register
 set guicursor=n:blinkon1
+set diffopt=vertical,filler
+set inccommand=nosplit " highlight substitutions
 
 " ALE CONIGURATIONS
 let g:ale_linters = {
@@ -205,13 +206,6 @@ highlight ALEErrorSign guibg='#5F0000' gui=underline
 highlight ALEWarningSign guifg='#F1FA8C'
 let g:ale_fix_on_save = 1
 noremap <C-F>  :ALEFix <CR>
-
-" NVIM Completion Manager
-" use (shift +) tab to select
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" Set enter to close menu instead of line break
-inoremap <expr> <CR> (pumvisible() ? "\<C-y>" : "\<CR>")
 
 " My Key Mappings
 " clears vims search highlight with F2
@@ -261,6 +255,8 @@ onoremap J 4j
 onoremap K 4k
 " Add Punctuation to end of line or line break
 nnoremap <leader><CR> i<CR><Esc>
+" Flatten
+nnoremap F J
 nnoremap <leader>; $a;<Esc>
 nnoremap <leader>, $a,<Esc>
 " Add Symbol after Cursor
@@ -300,3 +296,5 @@ let g:jsx_ext_required = 0
 " Save Files With Root Priveleges
 command! -nargs=0 Sw w !sudo tee % > /dev/null
 
+" Stop recording
+nnoremap q <Nop> 
