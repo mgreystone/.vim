@@ -17,6 +17,10 @@ set runtimepath+=~/.vim
 call plug#begin('~/.vim/plugged')
 " start- all plugins below
 
+Plug 'icymind/NeoSolarized'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'kburdett/vim-nuuid'
+" Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdtree'
 " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -24,13 +28,13 @@ Plug 'moll/vim-bbye'
 
 if has('python3')
   Plug 'roxma/nvim-yarp'
-  Plug 'ncm2/ncm2'
-  Plug 'ncm2/ncm2-path'
-  Plug 'ncm2/ncm2-bufword'
+  " Plug 'ncm2/ncm2'
+  " Plug 'ncm2/ncm2-path'
+  " Plug 'ncm2/ncm2-bufword'
   " Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
-  Plug 'ncm2/ncm2-cssomni'
+  " Plug 'ncm2/ncm2-cssomni'
 
-  autocmd BufEnter * call ncm2#enable_for_buffer()
+  " autocmd BufEnter * call ncm2#enable_for_buffer()
   set completeopt=noinsert,menuone,noselect
   set shortmess+=c
   inoremap <expr> <CR> (pumvisible() ? "\<C-y>" : "\<CR>")
@@ -84,17 +88,14 @@ Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 " stop - all plugins above
 call plug#end()
 
-" font
-set guifont=FiraCode\ Nerd\ Font\ 11
-" set guifont=Fira_Code:h15
-
 " set color
 set termguicolors
-colorscheme neodim
-let g:neodim_italic = 1
+set background=dark
+colorscheme NeoSolarized
 highlight Normal ctermbg=NONE
 highlight nonText ctermbg=NONE
 highlight Difftext ctermbg=NONE guibg=NONE
+let &colorcolumn=join(range(81,999),",")
 
 " vim-markdown-composer
 let g:markdown_composer_syntax_theme='dracula'
@@ -104,8 +105,8 @@ nnoremap <C-m> :ComposerStart<CR>
 " Indentation Guides
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#15181F ctermbg=15
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#1E2029 ctermbg=NONE
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#002B36 ctermbg=15
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#073642 ctermbg=NONE
 
 " AIRLINE CONFIG
 let g:airline_theme='neodim'
@@ -120,12 +121,18 @@ autocmd BufWinEnter *.* silent! loadview
  
 " NERDTREE
 " NERDTree shortcut
-nnoremap <F1> :e.<CR>
+noremap <F1> :NERDTreeToggle<CR>
 " Show dot files (ie. .vimrc)
 let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeShowHidden=1
-let g:NERDTreeMinimalUI=1
-let g:NERDTreeDirArrows=1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeDirArrows = 1
+" Auto Open NERDTree when vim is opened with no args or when file opened is a
+" directory. Else only open file
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+" Close vim if only NERDTree is open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " NERDTree Syntax Highlighting
@@ -137,6 +144,7 @@ let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exac
 let g:NERDTreeLimitedSyntax=1
 
 " Built in Vim Settings
+set colorcolumn=80
 set cursorline    " highlight current line
 set hidden        " allow for modified buffers to be in the background, makes buffers feel more like tabs
 set tabstop=2     " show existing tab with 2 spaces width
@@ -145,7 +153,7 @@ set shiftround    " Round to the nearest tab
 set expandtab     " On pressing tab, insert 2 spaces
 set autoindent    " Enable auto-indent
 set smarttab      " Tab smarter
-set number        " Show line numbers
+set number relativenumber   " Show line numbers
 set smartindent   " C-like autoindenting when starting a new line
 set mouse=a       " Enable mouse
 set noswapfile    " Disables making temporary backup files (.swp)
@@ -195,18 +203,13 @@ let g:ale_javascript_prettier_use_local_config = 1
 
 let g:ale_sign_column_always = 1
 let g:ale_sign_warning = '>>'
-" Comment these 2 lines out if your terminal doesn't support emojis
-" let g:ale_sign_warning = '⚠️'
-" let g:ale_sign_error = '⛔️'
 highlight ALEError ctermbg=none guibg=none cterm=underline gui=underline
 highlight ALEWarning ctermbg=none guibg=none cterm=underline gui=underline
-" highlight ALEErrorSign guibg='#810000'
-" highlight ALEErrorSign guibg='#823838'
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 highlight ALEErrorSign guibg='#5F0000' gui=underline
 highlight ALEWarningSign guifg='#F1FA8C'
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 noremap <C-F>  :ALEFix <CR>
 
 " My Key Mappings
@@ -243,22 +246,22 @@ nnoremap <Leader>7 :b7<CR>
 nnoremap <Leader>8 :b8<CR>
 nnoremap <Leader>9 :b9<CR>
 " Faster Navigation
-nnoremap H ^
-nnoremap L $
-nnoremap J 4j
-nnoremap K 4k
-vnoremap H ^
-vnoremap L $
-vnoremap J 4j
-vnoremap K 4k
-onoremap H ^
-onoremap L $
-onoremap J 4j
-onoremap K 4k
+" nnoremap H ^
+" nnoremap L $
+" nnoremap J 4j
+" nnoremap K 4k
+" vnoremap H ^
+" vnoremap L $
+" vnoremap J 4j
+" vnoremap K 4k
+" onoremap H ^
+" onoremap L $
+" onoremap J 4j
+" onoremap K 4k
 " Add Punctuation to end of line or line break
 nnoremap <leader><CR> i<CR><Esc>
 " Flatten
-nnoremap F J
+" nnoremap F J
 nnoremap <leader>; $a;<Esc>
 nnoremap <leader>, $a,<Esc>
 " Add Symbol after Cursor
@@ -280,7 +283,6 @@ nnoremap <leader>n :cn<CR>
 nnoremap <leader>p :cp<CR>
 
 " My Abbreviations
-iabbrev @@ jasminejacquelin@gmail.com
 iabbrev ireact import React from 'react'
 iabbrev ireactrouter import {  } from 'react-router-dom'
 iabbrev iaxios import axios from 'axios'
@@ -299,4 +301,4 @@ let g:jsx_ext_required = 0
 command! -nargs=0 Sw w !sudo tee % > /dev/null
 
 " Stop recording
-nnoremap q <Nop> 
+" nnoremap q <Nop> 
