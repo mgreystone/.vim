@@ -1,7 +1,6 @@
-# Jazzy's NeoVim
+# Markus's NeoVim
 
-Hi, I'm Jazzy!
-I :heart: nerding out about ![NeoVim](https://raw.githubusercontent.com/neovim/neovim.github.io/master/logos/favicon.ico) and customizing the editor!
+My NeoVim config. This was graciously gifted to me by [@jasminabasurita](https://github.com/jasminabasurita/.vim).
 
 ![Vim Screenshot](https://raw.githubusercontent.com/jasminabasurita/.vim/master/vim.png)
 
