@@ -73,6 +73,8 @@ Plug 'tpope/vim-surround'
 Plug 'ryanoasis/vim-devicons'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ap/vim-css-color'
+Plug 'godlygeek/tabular'
+Plug 'embear/vim-localvimrc'
 " Build Composer function for markdown composer
 function! BuildComposer(info)
   if a:info.status != 'unchanged' || a:info.force
