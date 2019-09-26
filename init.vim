@@ -86,6 +86,7 @@ function! BuildComposer(info)
   endif
 endfunction
 Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+Plug 'digitaltoad/vim-pug', { 'for': ['jade', 'pug'] }
 
 " stop - all plugins above
 call plug#end()
