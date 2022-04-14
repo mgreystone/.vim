@@ -87,6 +87,7 @@ function! BuildComposer(info)
 endfunction
 Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 Plug 'digitaltoad/vim-pug', { 'for': ['jade', 'pug'] }
+Plug 'elixir-editors/vim-elixir'
 
 " stop - all plugins above
 call plug#end()
@@ -102,7 +103,7 @@ let &colorcolumn=join(range(81,999),",")
 
 " vim-markdown-composer
 let g:markdown_composer_syntax_theme='dracula'
-let g:markdown_composer_autostart=0
+" let g:markdown_composer_autostart=0
 " nnoremap <C-m> :ComposerStart<CR>
 
 " Indentation Guides
