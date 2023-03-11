@@ -224,6 +224,7 @@ let g:ale_fixers = {
 \   'json': ['prettier'],
 \   'markdown': ['prettier'],
 \   'svelte': ['eslint'. 'stylelint'],
+\   'terraform': ['terraform']
 \}
 
 " with prettier
