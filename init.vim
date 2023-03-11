@@ -1,5 +1,8 @@
 " ~/.vimrc
 
+" set exrc
+" set secure
+
 " no vi compat
 set nocompatible
 
@@ -75,6 +78,18 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ap/vim-css-color'
 Plug 'godlygeek/tabular'
 Plug 'embear/vim-localvimrc'
+" Plug 'LucHermitte/lh-vim-lib'
+" Plug 'LucHermitte/local_vimrc'
+Plug 'othree/html5.vim'
+" Plug 'evanleck/vim-svelte', {'branch': 'main'}
+Plug 'leafOfTree/vim-svelte-plugin'
+
+let g:vim_svelte_plugin_load_full_syntax = 1
+let g:svelte_preprocessors = ['typescript']
+" let g:syntastic_svelte_checkers = ['javascript/eslint']
+
+let g:vim_svelte_plugin_use_typescript = 1
+
 " Build Composer function for markdown composer
 function! BuildComposer(info)
   if a:info.status != 'unchanged' || a:info.force
@@ -88,6 +103,16 @@ endfunction
 Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 Plug 'digitaltoad/vim-pug', { 'for': ['jade', 'pug'] }
 Plug 'elixir-editors/vim-elixir'
+
+Plug 'leafgarland/typescript-vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+let g:coc_global_extensions = ['coc-tsserver']
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+Plug 'jparise/vim-graphql'
+
 
 " stop - all plugins above
 call plug#end()
@@ -179,22 +204,26 @@ set diffopt=vertical,filler
 set inccommand=nosplit " highlight substitutions
 
 " ALE CONIGURATIONS
+let g:ale_linter_aliases = {'svelte': ['svelte', 'css', 'javascript']}
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'javascript.jsx': ['eslint'],
-\   'json': ['eslint'],
+\   'typescript': ['eslint'],
 \   'python': ['flake8'],
 \   'css': ['stylelint'],
 \   'scss': ['stylelint'],
-\   'vim': ['vint']
+\   'vim': ['vint'],
+\   'svelte': ['svelteserver', 'eslint', 'stylelint']
 \}
 let g:ale_fixers = { 
 \   'javascript': ['eslint'],
+\   'typescript': ['eslint'],
 \   'python': ['autopep8', 'yapf'],
 \   'css': ['stylelint'],
 \   'scss': ['stylelint'],
 \   'json': ['prettier'],
-\   'markdown': ['prettier']
+\   'markdown': ['prettier'],
+\   'svelte': ['eslint'. 'stylelint'],
 \}
 
 " with prettier
@@ -215,6 +244,16 @@ highlight ALEErrorSign guibg='#5F0000' gui=underline
 highlight ALEWarningSign guifg='#F1FA8C'
 let g:ale_fix_on_save = 0
 noremap <C-F>  :ALEFix <CR>
+
+let s:sdks = finddir('.yarn/sdks', ';')
+if !empty(s:sdks)
+  let g:ale_javascript_eslint_use_global = 1
+  let g:ale_javascript_eslint_executable = s:sdks . '/eslint/bin/eslint.js'
+  let g:ale_javascript_flow_ls_use_global = 1
+  let g:ale_javascript_flow_ls_executable = s:sdks . '/flow-bin/cli.js'
+  let g:ale_javascript_prettier_use_global = 1
+  let g:ale_javascript_prettier_executable = s:sdks . '/prettier/index.js'
+endif
 
 " My Key Mappings
 " clears vims search highlight with F2
@@ -303,6 +342,8 @@ let g:jsx_ext_required = 0
 
 " Save Files With Root Priveleges
 command! -nargs=0 Sw w !sudo tee % > /dev/null
+
+let g:localvimrc_whitelist = [$HOME.'/src/mondrian/', $HOME.'/src/mondrian-api/']
 
 " Stop recording
 " nnoremap q <Nop> 
