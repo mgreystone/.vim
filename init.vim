@@ -25,8 +25,6 @@ Plug 'shaunsingh/solarized.nvim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'kburdett/vim-nuuid'
 " Plug 'terryma/vim-multiple-cursors'
-Plug 'scrooloose/nerdtree'
-" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'moll/vim-bbye'
 
@@ -67,7 +65,6 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$|bower_components|node_modules',
   \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\',
 \ }
-Plug 'w0rp/ale'
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -108,6 +105,40 @@ Plug 'elixir-editors/vim-elixir'
 Plug 'leafgarland/typescript-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jparise/vim-graphql'
+
+
+if exists('g:vscode')
+  " VSCode extension
+
+  " THEME CHANGER
+  function! SetCursorLineNrColorInsert(mode)
+      " Insert mode: blue
+      if a:mode == "i"
+          call VSCodeNotify('nvim-theme.insert')
+  
+      " Replace mode: red
+      elseif a:mode == "r"
+          call VSCodeNotify('nvim-theme.replace')
+      endif
+  endfunction
+  
+  augroup CursorLineNrColorSwap
+      autocmd!
+      autocmd ModeChanged *:[vV\x16]* call VSCodeNotify('nvim-theme.visual')
+      autocmd ModeChanged *:[R]* call VSCodeNotify('nvim-theme.replace')
+     autocmd InsertEnter * call SetCursorLineNrColorInsert(v:insertmode)
+      autocmd InsertLeave * call VSCodeNotify('nvim-theme.normal')
+      autocmd CursorHold * call VSCodeNotify('nvim-theme.normal')
+      autocmd ModeChanged [vV\x16]*:* call VSCodeNotify('nvim-theme.normal')
+  augroup END
+
+else
+  " ordinary Neovim
+
+  Plug 'w0rp/ale'
+  Plug 'scrooloose/nerdtree'
+  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+endif
 
 
 " stop - all plugins above
@@ -201,28 +232,22 @@ set diffopt=vertical,filler
 set inccommand=nosplit " highlight substitutions
 
 " ALE CONIGURATIONS
+let g:ale_disable_lsp = 1
 let g:ale_linter_aliases = {'svelte': ['svelte', 'css', 'javascript']}
 let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'javascript.jsx': ['eslint'],
-\   'typescript': ['eslint'],
-\   'typescriptreact': ['eslint'],
 \   'python': ['flake8'],
 \   'css': ['stylelint'],
 \   'scss': ['stylelint'],
 \   'vim': ['vint'],
-\   'svelte': ['svelteserver', 'eslint', 'stylelint']
+\   'svelte': ['svelteserver', 'stylelint']
 \}
 let g:ale_fixers = { 
-\   'javascript': ['eslint'],
-\   'typescript': ['eslint'],
-\   'typescriptreact': ['eslint'],
 \   'python': ['autopep8', 'yapf'],
 \   'css': ['stylelint'],
 \   'scss': ['stylelint'],
 \   'json': ['prettier'],
 \   'markdown': ['prettier'],
-\   'svelte': ['eslint'. 'stylelint'],
+\   'svelte': ['stylelint'],
 \   'terraform': ['terraform']
 \}
 
@@ -236,6 +261,7 @@ let g:ale_javascript_prettier_use_local_config = 1
 
 let g:ale_sign_column_always = 1
 let g:ale_sign_warning = '>>'
+let g:ale_lint_on_text_changed = 'never'
 highlight ALEError ctermbg=none guibg=none cterm=underline gui=underline
 highlight ALEWarning ctermbg=none guibg=none cterm=underline gui=underline
 highlight clear ALEErrorSign
@@ -243,7 +269,7 @@ highlight clear ALEWarningSign
 highlight ALEErrorSign guibg='#5F0000' gui=underline
 highlight ALEWarningSign guifg='#F1FA8C'
 let g:ale_fix_on_save = 0
-noremap <C-F>  :ALEFix <CR>
+noremap <C-F>  :ALEFix <CR> <BAR> :CocCommand eslint.executeAutofix <CR>
 
 let s:sdks = finddir('.yarn/sdks', ';')
 if !empty(s:sdks)
