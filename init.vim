@@ -147,6 +147,7 @@ call plug#end()
 " set color
 set termguicolors
 set background=dark
+let g:neosolarized_contrast = "high"
 colorscheme NeoSolarized
 " colorscheme solarized
 highlight Normal ctermbg=NONE
@@ -235,6 +236,10 @@ set inccommand=nosplit " highlight substitutions
 let g:ale_disable_lsp = 1
 let g:ale_linter_aliases = {'svelte': ['svelte', 'css', 'javascript']}
 let g:ale_linters = {
+\   'javascript': [],
+\   'javascript.jsx': [],
+\   'typescript': [],
+\   'typescriptreact': [],
 \   'python': ['flake8'],
 \   'css': ['stylelint'],
 \   'scss': ['stylelint'],
@@ -242,6 +247,10 @@ let g:ale_linters = {
 \   'svelte': ['svelteserver', 'stylelint']
 \}
 let g:ale_fixers = { 
+\   'javascript': [],
+\   'javascript.jsx': [],
+\   'typescript': [],
+\   'typescriptreact': [],
 \   'python': ['autopep8', 'yapf'],
 \   'css': ['stylelint'],
 \   'scss': ['stylelint'],
@@ -369,7 +378,7 @@ let g:jsx_ext_required = 0
 " Save Files With Root Priveleges
 command! -nargs=0 Sw w !sudo tee % > /dev/null
 
-let g:localvimrc_whitelist = [$HOME.'/src/mondrian/', $HOME.'/src/mondrian-api/', $HOME.'/src/writers-block', $HOME.'/src/webpack-rise-packages', $HOME.'/src/rise-frontend-learn-module-sample', $HOME.'/src/amygdala-demo', $HOME.'/src/hocuspocus', $HOME.'/src/rise-content', $HOME.'/src/rise-l10n-review-proto', $HOME.'/src/rise-authoring-dashboard']
+let g:localvimrc_whitelist = [$HOME.'/src/mondrian/', $HOME.'/src/mondrian-api/', $HOME.'/src/writers-block', $HOME.'/src/webpack-rise-packages', $HOME.'/src/rise-frontend-learn-module-sample', $HOME.'/src/amygdala-demo', $HOME.'/src/hocuspocus', $HOME.'/src/rise-content', $HOME.'/src/rise-l10n-review-proto', $HOME.'/src/rise-authoring-dashboard', $HOME.'/src/rise-tiptap']
 
 " Stop recording
 " nnoremap q <Nop> 
